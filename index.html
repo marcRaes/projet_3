@@ -62,9 +62,18 @@
                 <i class="fa fa-map-marker" aria-hidden="true"></i><h1>Louer votre velib'</h1>
             </header> <!-- /Header de la 3éme Section -->
 
-            <!-- Ici se trouvera la carte maps -->
+            <article>
+
+                <div id="carte"></div> <!-- Div de la carte Google Maps -->
+                <!-- Script d'affichage de la carte -->
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuU5RQy__LmfyR4Q77dkP6JQ-MeCAPdSY&callback=initMap" async defer></script>
+                
+            </article>
 
         </section> <!-- /3éme section "Location de velib" -->
+
+        <!-- Fichiers JavaScript -->
+        <script src="js/maps.js"></script> <!-- Carte Maps location velib -->
 
     </body>
 </html>
