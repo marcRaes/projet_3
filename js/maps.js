@@ -32,30 +32,44 @@ function initMap() {
         listeStations.forEach(function (station) {
             // Positionne les marqueurs sur la carte
             var marqueur = new google.maps.Marker({
-                position: new google.maps.LatLng(station.position),
-                map : map,
-                title: station.name
-            });
+                map: map,
+                position: station.position
+              });
 
-            // Ajoute un évenement aux marqueurs
+            // Ajoute un évenement lors du clique sur un marqueur
             google.maps.event.addListener(marqueur, 'click', function() {
                 // Insertion des infos sur la station
                 // Nom de la station
                 document.getElementById("nomStation").innerHTML = "";
                 document.getElementById("nomStation").innerHTML = station.name;
+                // Adresse de la station
+                document.getElementById("adresseStation").innerHTML = "";
+                document.getElementById("adresseStation").innerHTML = station.address;
                 // Etat de la station
                 document.getElementById("etatStation").innerHTML = "";
-                document.getElementById("etatStation").innerHTML = station.status;
+                if(station.status === "OPEN") {
+                    document.getElementById("etatStation").innerHTML = "OUVERT";
+                } else {
+                    document.getElementById("etatStation").innerHTML = "FERMER";
+                }
+                
                 //  Nombre de vélos disponibles et opérationnels à la station
                 document.getElementById("veloDispo").innerHTML = "";
                 document.getElementById("veloDispo").innerHTML = station.available_bikes;
                 //  Nombre de points d'attache opérationnels à la station
                 document.getElementById("attacheDispo").innerHTML = "";
-                document.getElementById("attacheDispo").innerHTML = station.bike_stands;
+                document.getElementById("attacheDispo").innerHTML = station.available_bike_stands;
                 // /Insertion des infos sur la station
 
                 var infoStation = document.getElementById("infoStation");
                 infoStation.style.display = "block"; // Fait apparaitre le cadre d'info sur la station
+
+                // Street View
+                var streetView = new google.maps.StreetViewPanorama(document.getElementById("streetView"),{
+                    position: station.position,
+                    linksControl: false,
+                    panControl: false
+                });
             });
         });
     });

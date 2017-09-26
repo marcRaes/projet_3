@@ -6,6 +6,7 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <!-- Feuilles de style -->
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
     </head>
 
@@ -72,12 +73,15 @@
                     <h1>Informations sur la station :</h1>
                     <!-- Informations sur la station sélectionner -->
                     <ul id="listeInfo">
-                        <li>Nom de la station : <span id="nomStation"> <!-- Nom insérer en JavaScript --> </span></li>
-                        <li>Etat de la Station : <span id="etatStation"> <!-- Etat insérer en JavaScript --> </span></li>
+                        <li>Nom : <span id="nomStation"> <!-- Nom insérer en JavaScript --> </span></li>
+                        <li>Adresse : <span id="adresseStation"> <!-- Adresse insérer en JavaScript --> </span></li>
+                        <li>Etat : <span id="etatStation"> <!-- Etat insérer en JavaScript --> </span></li>
                         <li>Vélos disponibles et opérationnels : <span id="veloDispo"> <!-- Nombre insérer en JavaScript --> </span></li>
                         <li>Points d'attache disponibles : <span id="attacheDispo"> <!-- Nombre insérer en JavaScript --> </span></li>
                     </ul>
                     <!-- /Informations sur la station sélectionner -->
+
+                    <div id="streetView"></div> <!-- Div vue Street View -->
                 </div> <!-- /Cadre informations sur la station sélectionner -->
 
             </article>

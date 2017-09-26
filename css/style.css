@@ -6,6 +6,7 @@
 body {
     width: 100%;
     max-width: 1920px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 header {
@@ -59,7 +60,7 @@ header h1 {
 
 #carte {
     width: 800px;
-    height: 500px;
+    height: 600px;
 }
 
 article {
@@ -70,16 +71,16 @@ article {
 
 #infoStation {
     width: 420px;
-    background-color: #272822;
+    background-color: #3c304f;
     margin-left: 30px;
-    padding: 20px;
+    padding: 10px;
     display: none;
 }
 
 #infoStation h1 {
     text-transform: uppercase;
     text-align: center;
-    color: #E95325;
+    color: #fff;
     font-size: 1.5em;
 }
 
@@ -89,11 +90,24 @@ article {
 }
 
 #listeInfo li {
-    line-height: 2.5em;
+    font-size: 0.9em;
+    font-weight: 300;
     color: #EAF8F2;
 }
 
+#listeInfo li + li {
+    margin-top: 15px;
+}
+
 #listeInfo span {
-    font-weight: bold;
+    font-size: 1em;
+    line-height: 1.5em;
+    font-weight: 600;
     color: #66D9EF;
+}
+
+#streetView {
+    width: 300px;
+    height: 200px;
+    margin: 10px auto;
 }
