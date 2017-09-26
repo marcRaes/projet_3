@@ -39,13 +39,19 @@ function initMap() {
 
             // Ajoute un évenement aux marqueurs
             google.maps.event.addListener(marqueur, 'click', function() {
-
                 // Insertion des infos sur la station
-                document.getElementById("nomStation").insertAdjacentHTML("beforeend", "<strong>" + station.name + "</strong>"); // Nom de la station
-                document.getElementById("adresseStation").insertAdjacentHTML("beforeend", "<strong>" + station.adress + "</strong>"); // Adresse de la station
-                document.getElementById("etatStation").insertAdjacentHTML("beforeend", "<strong>" + station.status + "</strong>"); // Etat de la station
-                document.getElementById("veloDispo").insertAdjacentHTML("beforeend", "<strong>" + station.available_bikes + "</strong>"); //  Nombre de vélos disponibles et opérationnels
-                document.getElementById("attacheDispo").insertAdjacentHTML("beforeend", "<strong>" + station.bike_stands + "</strong>"); //  Nombre de points d'attache opérationnels
+                // Nom de la station
+                document.getElementById("nomStation").innerHTML = "";
+                document.getElementById("nomStation").innerHTML = station.name;
+                // Etat de la station
+                document.getElementById("etatStation").innerHTML = "";
+                document.getElementById("etatStation").innerHTML = station.status;
+                //  Nombre de vélos disponibles et opérationnels à la station
+                document.getElementById("veloDispo").innerHTML = "";
+                document.getElementById("veloDispo").innerHTML = station.available_bikes;
+                //  Nombre de points d'attache opérationnels à la station
+                document.getElementById("attacheDispo").innerHTML = "";
+                document.getElementById("attacheDispo").innerHTML = station.bike_stands;
                 // /Insertion des infos sur la station
 
                 var infoStation = document.getElementById("infoStation");

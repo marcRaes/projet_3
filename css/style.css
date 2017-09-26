@@ -69,13 +69,31 @@ article {
 }
 
 #infoStation {
-    width: 300px;
-    background-color: #ccc;
+    width: 420px;
+    background-color: #272822;
     margin-left: 30px;
+    padding: 20px;
     display: none;
 }
 
 #infoStation h1 {
     text-transform: uppercase;
     text-align: center;
+    color: #E95325;
+    font-size: 1.5em;
+}
+
+#listeInfo {
+    list-style-type: none;
+    margin: 30px 0;
+}
+
+#listeInfo li {
+    line-height: 2.5em;
+    color: #EAF8F2;
+}
+
+#listeInfo span {
+    font-weight: bold;
+    color: #66D9EF;
 }
