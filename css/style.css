@@ -3,12 +3,6 @@
     padding: 0;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
 body {
     width: 100%;
     max-width: 1920px;
@@ -33,7 +27,7 @@ header h1 {
     font-size: 3em;
 }
 
-#texteDefilant {
+#welcomeText {
     padding: 15px 5px;
     font-size: 1.15em;
     font-weight: bold;
@@ -56,7 +50,7 @@ header h1 {
 #slideshow figure {
 	position:relative;
     padding:0; margin:0;
-    width: 800px;
+    width: 100%;
 }
 
 #slideshow figure img {
@@ -66,5 +60,22 @@ header h1 {
 #carte {
     width: 800px;
     height: 500px;
-    margin: 30px auto;
+}
+
+article {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+#infoStation {
+    width: 300px;
+    background-color: #ccc;
+    margin-left: 30px;
+    display: none;
+}
+
+#infoStation h1 {
+    text-transform: uppercase;
+    text-align: center;
 }

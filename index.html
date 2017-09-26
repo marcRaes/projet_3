@@ -18,7 +18,7 @@
                 <i class="fa fa-bicycle" aria-hidden="true"></i><h1>Location de velib'</h1>
             </header> <!-- /Header de la 1ére Section -->
 
-            <p id="texteDefilant">Bienvenue sur le site de location de velib' de la ville de Paris</p>
+            <p id="welcomeText">Bienvenue sur le site de location de velib' de la ville de Paris</p>
 
         </section> <!-- /1ére Section "Bienvenue" -->
 
@@ -67,7 +67,18 @@
                 <div id="carte"></div> <!-- Div de la carte Google Maps -->
                 <!-- Script d'affichage de la carte -->
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuU5RQy__LmfyR4Q77dkP6JQ-MeCAPdSY&callback=initMap" async defer></script>
-                
+
+                <div id="infoStation"> <!-- Cadre informations sur la station sélectionner -->
+                    <h1>Informations sur la station :</h1>
+                    <!-- Informations sur la station sélectionner -->
+                    <span id="nomStation">Nom de la station : <!-- Nom insérer en JavaScript --> </span>
+                    <span id="adresseStation">Adresse de la station : <!-- Adresse insérer en JavaScript --> </span>
+                    <span id="etatStation">Etat de la Station : <!-- Etat insérer en JavaScript --> </span>
+                    <span id="veloDispo">Vélos disponibles et opérationnels : <!-- Nombre insérer en JavaScript --> </span>
+                    <span id="attacheDispo">Points d'attache disponibles : <!-- Nombre insérer en JavaScript --> </span>
+                    <!-- /Informations sur la station sélectionner -->
+                </div> <!-- /Cadre informations sur la station sélectionner -->
+
             </article>
 
         </section> <!-- /3éme section "Location de velib" -->
