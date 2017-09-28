@@ -5,7 +5,6 @@
 
 body {
     width: 100%;
-    max-width: 1920px;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -110,4 +109,64 @@ article {
     width: 300px;
     height: 200px;
     margin: 10px auto;
+}
+
+#infoStation p {
+    width: 130px;
+    height: 40px;
+    margin: 30px auto;
+    box-shadow: 2px 2px 3px #000;
+    border-radius: 6px;
+    transition: all 0.5s;
+}
+
+#infoStation button {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(#811215, #AD1E22);
+    border: none;
+    box-shadow: inset -1px -1px 10px #181717;
+    color: #EBE9E9;
+    text-shadow: 2px 2px 1px #000;
+    font-size: 1.1em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.5s;
+}
+
+#infoStation button:hover {
+    box-shadow: inset 1px 1px 10px #181717;
+    background-image: linear-gradient(#AD1E22, #811215);
+    color: #D6D6D6;
+    text-shadow: -2px -2px 1px #000;
+}
+
+#infoStation p:hover {
+    box-shadow: -2px -2px 3px #000;
+}
+
+#canvasSignature {
+    position: relative;
+    width: 800px;
+    height: 200px;
+    margin: 20px auto;
+}
+
+#signature {
+    width: 800px;
+    height: 200px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+#canvasSignature p {
+    position: absolute;
+    top: 0; left: 0;
+    background-color: rgba(204, 204, 204, 0.3);
+    border-radius: 10px 0 0 0;
+    padding: 2px 5px;
+    font-size: 0.7em;
 }

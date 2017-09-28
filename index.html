@@ -70,26 +70,35 @@
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuU5RQy__LmfyR4Q77dkP6JQ-MeCAPdSY&callback=initMap" async defer></script>
 
                 <div id="infoStation"> <!-- Cadre informations sur la station sélectionner -->
+
                     <h1>Informations sur la station :</h1>
                     <!-- Informations sur la station sélectionner -->
                     <ul id="listeInfo">
                         <li>Nom : <span id="nomStation"> <!-- Nom insérer en JavaScript --> </span></li>
                         <li>Adresse : <span id="adresseStation"> <!-- Adresse insérer en JavaScript --> </span></li>
                         <li>Etat : <span id="etatStation"> <!-- Etat insérer en JavaScript --> </span></li>
-                        <li>Vélos disponibles et opérationnels : <span id="veloDispo"> <!-- Nombre insérer en JavaScript --> </span></li>
+                        <li>Vélos disponibles : <span id="veloDispo"> <!-- Nombre insérer en JavaScript --> </span></li>
                         <li>Points d'attache disponibles : <span id="attacheDispo"> <!-- Nombre insérer en JavaScript --> </span></li>
                     </ul>
                     <!-- /Informations sur la station sélectionner -->
 
                     <div id="streetView"></div> <!-- Div vue Street View -->
+
+                    <p><button>Réserver</button></p> <!-- Boutton de réservation -->
+
                 </div> <!-- /Cadre informations sur la station sélectionner -->
 
             </article>
+
+            <div id="canvasSignature">
+                <canvas id="signature"></canvas>
+                <p>Signature</p>
+            </div>
 
         </section> <!-- /3éme section "Location de velib" -->
 
         <!-- Fichiers JavaScript -->
         <script src="js/maps.js"></script> <!-- Carte Maps location velib -->
-
+        <script src="js/canvas.js"></script>
     </body>
 </html>
