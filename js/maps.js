@@ -52,6 +52,9 @@ function initMap() {
                 } else {
                     document.getElementById("etatStation").innerHTML = "FERMER";
                 }
+
+                // Insertion du nom de la station dans le cadre de réservation
+                document.getElementById("containerCanvas").querySelector("strong").innerHTML = station.name;
                 
                 //  Nombre de vélos disponibles et opérationnels à la station
                 document.getElementById("veloDispo").innerHTML = "";

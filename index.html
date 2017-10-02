@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/styleSlideshow.css">
     </head>
 
     <body>
@@ -60,7 +61,7 @@
 
             <header> <!-- Header de la 3éme Section -->
                 <!-- Logo FontAwesome + titre header -->
-                <i class="fa fa-map-marker" aria-hidden="true"></i><h1>Louer votre velib'</h1>
+                <i class="fa fa-thumb-tack" aria-hidden="true"></i><h1>Louer votre velib'</h1>
             </header> <!-- /Header de la 3éme Section -->
 
             <article>
@@ -90,11 +91,16 @@
 
             </article>
 
-            <div id="canvasSignature">
-                <canvas id="signature"></canvas>
+            <div id="containerCanvas">
+                <p>Vous étes sur le point de réserver un vélo à la station <strong></strong></p>
+                <canvas id="signature" width="800" height="200"></canvas>
                 <p>Signature</p>
-            </div>
 
+                <div id="bouttonCanvas">
+                    <p><button id="boutonValider"><span class="fa fa-check logoBouttonCanvas"></span>Valider</button></p>
+                    <p><button id="bouttonEffacer"><span class="fa fa-eraser logoBouttonCanvas"></span>Effacer</button></p>
+                </div>
+            </div>
         </section> <!-- /3éme section "Location de velib" -->
 
         <!-- Fichiers JavaScript -->
