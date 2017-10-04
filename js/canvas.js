@@ -43,8 +43,8 @@ var clear = document.getElementById("bouttonEffacer").addEventListener("click", 
     context.clearRect(0, 0, 800, 200);
 });
 
-var signature = document.getElementById("infoStation").querySelector("button");
-signature.addEventListener("click", function(){
-    document.getElementById("containerCanvas").style.display = "block";
+var checked = document.getElementById("bouttonValider").addEventListener("click", function(){
+    sessionStorage.setItem("reservation", "effectuer");
+    var data = sessionStorage.getItem("reservation");
+    console.log(data);
 });
-

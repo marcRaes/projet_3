@@ -51,21 +51,23 @@ function initMap() {
                     document.getElementById("etatStation").innerHTML = "OUVERT";
                 } else {
                     document.getElementById("etatStation").innerHTML = "FERMER";
+                    document.getElementById("etatStation").style.color = "red";
                 }
 
                 // Insertion du nom de la station dans le cadre de réservation
                 document.getElementById("containerCanvas").querySelector("strong").innerHTML = station.name;
                 
                 //  Nombre de vélos disponibles et opérationnels à la station
+                if(station.available_bikes === 0) {
+                    document.getElementById("veloDispo").style.color = "red";
+                }
                 document.getElementById("veloDispo").innerHTML = "";
                 document.getElementById("veloDispo").innerHTML = station.available_bikes;
+
                 //  Nombre de points d'attache opérationnels à la station
                 document.getElementById("attacheDispo").innerHTML = "";
                 document.getElementById("attacheDispo").innerHTML = station.available_bike_stands;
                 // /Insertion des infos sur la station
-
-                var infoStation = document.getElementById("infoStation");
-                infoStation.style.display = "block"; // Fait apparaitre le cadre d'info sur la station
 
                 // Street View
                 var streetView = new google.maps.StreetViewPanorama(document.getElementById("streetView"),{
@@ -73,6 +75,15 @@ function initMap() {
                     linksControl: false,
                     panControl: false
                 });
+
+                var infoStation = document.getElementById("infoStation");
+                infoStation.style.display = "block"; // Fait apparaitre le cadre d'info sur la station
+                document.getElementById("containerCanvas").style.display = "none"; // Fait disparaitre le canvas si celui-ci à était affiché
+            });
+            var signature = document.getElementById("infoStation").querySelector("button");
+            signature.addEventListener("click", function(){
+                document.getElementById("containerCanvas").style.display = "block";
+                window.scrollTo(0,750);
             });
         });
     });

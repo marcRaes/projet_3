@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/styleSlideshow.css">
     </head>
 
     <body>
@@ -25,36 +24,49 @@
         </section> <!-- /1ére Section "Bienvenue" -->
 
         <section> <!-- 2éme Section "Fonctionnement du service" -->
-
+            
             <header> <!-- Header de la 2éme Section -->
                 <!-- Logo FontAwesome + titre header -->
-                <i class="fa fa-question-circle" aria-hidden="true"></i><h1>Fonctionnement du service</h1>
+                <i class="fa fa-question-circle"></i><h1>Fonctionnement du service</h1>
             </header> <!-- /Header de la 2éme Section -->
-            
+                        
             <!-- Explication sur le fonctionnement du service par un diaporama -->
-            <div id="slideshow"> <!-- Diaporama d'explication -->
-
-                <div class="slider">
-                    
-                    <figure>
-                        <img src="images/velib_paris.jpg" alt="velib' à Paris" /> <!-- 1ére image du diaporama -->
-                        <figcaption>velib' à Paris</figcaption> <!-- 1er texte d'explication -->
-                    </figure>
-
-                    <figure>
-                        <img src="images/velib_paris2.jpg" alt="velib' à Paris" /> <!-- 2éme image du diaporama -->
-                        <figcaption>velib' à Paris</figcaption> <!-- 2éme texte d'explication -->
-                    </figure>
-
-                    <figure>
-                        <img src="images/velib_paris3.jpg" alt="velib' à Paris" /> <!-- 3éme image du diaporama -->
-                        <figcaption>velib' à Paris</figcaption> <!-- 3éme texte d'explication -->
-                    </figure>
-                    
-                </div>
-
-            </div> <!-- /Diaporama d'explication -->
+            <div id="diapo">
+                            
+                <div class="caroussel">
             
+                    <p id="bouttonGauche"><button onclick="rotate(1)"><span class="chevron left"></span></button></p>
+                                        
+                    <figure class="item">
+                        <img src="images/velib_paris.jpg">
+                                        
+                        <figcaption>
+                            Velib' à Paris
+                        </figcaption>
+                    </figure>
+                                                    
+                    <figure class="item">
+                        <img src="images/velib_paris2.jpg">
+                                            
+                        <figcaption>
+                            Velib' à Paris
+                        </figcaption>
+                    </figure>
+                                        
+                    <figure class="item">
+                        <img src="images/velib_paris3.jpg">
+                                            
+                        <figcaption>
+                            Velib' à Paris
+                        </figcaption>
+                    </figure>
+            
+                    <p id="bouttonDroit"><button onclick="rotate(-1)"><span class="chevron right"></span></button></p>
+                                                            
+                </div>
+                            
+            </div>
+                        
         </section> <!-- /2éme Section "Fonctionnement du service" -->
 
         <section> <!-- 3éme section "Location de velib" -->
@@ -97,13 +109,14 @@
                 <p>Signature</p>
 
                 <div id="bouttonCanvas">
-                    <p><button id="boutonValider"><span class="fa fa-check logoBouttonCanvas"></span>Valider</button></p>
+                    <p><button id="bouttonValider"><span class="fa fa-check logoBouttonCanvas"></span>Valider</button></p>
                     <p><button id="bouttonEffacer"><span class="fa fa-eraser logoBouttonCanvas"></span>Effacer</button></p>
                 </div>
             </div>
         </section> <!-- /3éme section "Location de velib" -->
 
         <!-- Fichiers JavaScript -->
+        <script src="js/slide.js"></script> <!-- Fichier JavaScript du slide -->
         <script src="js/maps.js"></script> <!-- Carte Maps location velib -->
         <script src="js/canvas.js"></script>
     </body>
