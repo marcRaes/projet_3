@@ -1,3 +1,7 @@
+// Cache les différents blocs de réservation
+document.getElementById("infoStation").style.display = "none";
+document.getElementById("containerCanvas").style.display = "none";
+
 // Définition d'une fonction AJAX génerique
 // Celle-ci permettra de récupérer la liste des stations
 function ajaxGet(url, callback) {
@@ -26,7 +30,7 @@ function initMap() {
     });
 
     // Appel de la requéte AJAX et récuperation de la liste des stations
-    ajaxGet("https://api.jcdecaux.com/vls/v1/stations?apiKey=8d964b828792e1a92da605f34933f01cc0f27098", function (reponse) {
+    ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=8d964b828792e1a92da605f34933f01cc0f27098", function (reponse) {
         var listeStations = JSON.parse(reponse);
         // Récupere la liste de la position des stations
         listeStations.forEach(function (station) {
@@ -76,6 +80,12 @@ function initMap() {
                     panControl: false
                 });
 
+                // Insertion du nom de la station dans le cadre de réservation
+                document.getElementById("containerCanvas").querySelector("strong").innerHTML = station.name;
+
+                // Insertion du nom dans la section de réservation
+                document.getElementById("messageLocation").querySelector("strong").innerHTML = station.name;
+
                 var infoStation = document.getElementById("infoStation");
                 infoStation.style.display = "block"; // Fait apparaitre le cadre d'info sur la station
                 document.getElementById("containerCanvas").style.display = "none"; // Fait disparaitre le canvas si celui-ci à était affiché
@@ -83,7 +93,7 @@ function initMap() {
             var signature = document.getElementById("infoStation").querySelector("button");
             signature.addEventListener("click", function(){
                 document.getElementById("containerCanvas").style.display = "block";
-                window.scrollTo(0,750);
+                window.scrollTo(0,900);
             });
         });
     });

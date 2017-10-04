@@ -42,9 +42,3 @@ function draw(canvas, posx, posy){
 var clear = document.getElementById("bouttonEffacer").addEventListener("click", function(){
     context.clearRect(0, 0, 800, 200);
 });
-
-var checked = document.getElementById("bouttonValider").addEventListener("click", function(){
-    sessionStorage.setItem("reservation", "effectuer");
-    var data = sessionStorage.getItem("reservation");
-    console.log(data);
-});

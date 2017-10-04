@@ -16,7 +16,7 @@
 
             <header> <!-- Header de la 1ére Section -->
                 <!-- Logo FontAwesome + titre header -->
-                <i class="fa fa-bicycle" aria-hidden="true"></i><h1>Location de velib'</h1>
+                <i class="fa fa-bicycle logoHeader"></i><h1>Location de velib'</h1>
             </header> <!-- /Header de la 1ére Section -->
 
             <p id="welcomeText">Bienvenue sur le site de location de velib' de la ville de Paris</p>
@@ -27,13 +27,13 @@
             
             <header> <!-- Header de la 2éme Section -->
                 <!-- Logo FontAwesome + titre header -->
-                <i class="fa fa-question-circle"></i><h1>Fonctionnement du service</h1>
+                <i class="fa fa-question-circle logoHeader"></i><h1>Fonctionnement du service</h1>
             </header> <!-- /Header de la 2éme Section -->
                         
             <!-- Explication sur le fonctionnement du service par un diaporama -->
-            <div id="diapo">
+            <div id="diaporama">
                             
-                <div class="caroussel">
+                <div id="caroussel">
             
                     <p id="bouttonGauche"><button onclick="rotate(1)"><span class="chevron left"></span></button></p>
                                         
@@ -73,7 +73,7 @@
 
             <header> <!-- Header de la 3éme Section -->
                 <!-- Logo FontAwesome + titre header -->
-                <i class="fa fa-thumb-tack" aria-hidden="true"></i><h1>Louer votre velib'</h1>
+                <i class="fa fa-compass logoHeader"></i><h1>Louer votre velib'</h1>
             </header> <!-- /Header de la 3éme Section -->
 
             <article>
@@ -97,16 +97,15 @@
 
                     <div id="streetView"></div> <!-- Div vue Street View -->
 
-                    <p><button>Réserver</button></p> <!-- Boutton de réservation -->
+                    <p id="bouttonReservation"><button>Réserver</button></p> <!-- Boutton de réservation -->
 
                 </div> <!-- /Cadre informations sur la station sélectionner -->
 
             </article>
 
             <div id="containerCanvas">
-                <p>Vous étes sur le point de réserver un vélo à la station <strong></strong></p>
-                <canvas id="signature" width="800" height="200"></canvas>
-                <p>Signature</p>
+                <p>Vous étes sur le point de réserver un vélo à la station <strong> <!-- Nom de la station insérer en JavaScript --> </strong></p>
+                <canvas id="signature" width="380" height="200"></canvas>
 
                 <div id="bouttonCanvas">
                     <p><button id="bouttonValider"><span class="fa fa-check logoBouttonCanvas"></span>Valider</button></p>
@@ -115,9 +114,24 @@
             </div>
         </section> <!-- /3éme section "Location de velib" -->
 
+        <section id="sectionLocation"> <!-- 4éme section "Message de location" -->
+
+            <header>
+                <i class="fa fa-hourglass-half logoHeader"></i><h1>Location en cours</h1>
+            </header>
+
+            <!-- Message afficher lors de la réservation -->
+            <p id="messageLocation">
+                Vous venez de réserver 1 vélo à la station : <strong> <!-- Nom de la station insérer en JavaScript --> </strong><br>
+                Votre réservation expirera dans <strong><span id="minutes">0</span> minutes et <span id="secondes">5</span> secondes</strong>
+            </p>
+
+        </section> <!-- /4éme section "Message de location" -->
+
         <!-- Fichiers JavaScript -->
-        <script src="js/slide.js"></script> <!-- Fichier JavaScript du slide -->
+        <script src="js/diaporama.js"></script> <!-- Diaporama -->
         <script src="js/maps.js"></script> <!-- Carte Maps location velib -->
-        <script src="js/canvas.js"></script>
+        <script src="js/canvas.js"></script> <!-- Canvas -->
+        <script src="js/reservation.js"></script> <!-- Réservation -->
     </body>
 </html>
