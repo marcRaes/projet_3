@@ -80,10 +80,10 @@ function initMap() {
                     panControl: false
                 });
 
-                // Insertion du nom de la station dans le cadre de réservation
+                // Insertion du nom de la station dans le canvas
                 document.getElementById("containerCanvas").querySelector("strong").innerHTML = station.name;
 
-                // Insertion du nom dans la section de réservation
+                // Insertion du nom de la station dans le message de location
                 document.getElementById("messageLocation").querySelector("strong").innerHTML = station.name;
 
                 var infoStation = document.getElementById("infoStation");
