@@ -80,7 +80,7 @@
 
                 <div id="carte"></div> <!-- Div de la carte Google Maps -->
                 <!-- Script d'affichage de la carte -->
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuU5RQy__LmfyR4Q77dkP6JQ-MeCAPdSY&callback=initMap" async defer></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuU5RQy__LmfyR4Q77dkP6JQ-MeCAPdSY&callback=maps.initMap" async defer></script>
 
                 <div id="infoStation"> <!-- Cadre informations sur la station sélectionner -->
 
@@ -98,6 +98,7 @@
                     <div id="streetView"></div> <!-- Div vue Street View -->
 
                     <p id="bouttonReservation"><button>Réserver</button></p> <!-- Boutton de réservation -->
+                    <p id="messageErreur">La réservation est impossible à cette station</p>
 
                 </div> <!-- /Cadre informations sur la station sélectionner -->
 
@@ -131,6 +132,7 @@
         <!-- Fichiers JavaScript -->
         <script src="js/diaporama.js"></script> <!-- Diaporama -->
         <script src="js/maps.js"></script> <!-- Carte Maps location velib -->
+        <script src="js/markerclusterer.js"></script> <!-- Fichier pour markerClusterer -->
         <script src="js/canvas.js"></script> <!-- Canvas -->
         <script src="js/reservation.js"></script> <!-- Réservation -->
     </body>
