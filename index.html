@@ -105,7 +105,7 @@
             </article>
 
             <div id="containerCanvas">
-                <p>Vous étes sur le point de réserver un vélo à la station <strong> <!-- Nom de la station insérer en JavaScript --> </strong></p>
+                <p>Vous étes sur le point de réserver un vélo à la station : <strong> <!-- Nom de la station insérer en JavaScript --> </strong></p>
                 <canvas id="signature" width="380" height="200"></canvas>
 
                 <div id="bouttonCanvas">
@@ -122,10 +122,11 @@
             </header>
 
             <!-- Message afficher lors de la réservation -->
-            <p id="messageLocation">
+            <div id="messageLocation">
                 Vous venez de réserver 1 vélo à la station : <strong> <!-- Nom de la station insérer en JavaScript --> </strong><br>
-                Votre réservation expirera dans <span id="compteur"></span>
-            </p>
+                Votre réservation expirera dans : <br>
+                <div id="compteur"><span id="minutes"></span><span id="secondes"></span></div>
+            </div>
 
         </section> <!-- /4éme section "Message de location" -->
 
@@ -134,6 +135,6 @@
         <script src="js/maps.js"></script> <!-- Carte Maps location velib -->
         <script src="js/markerclusterer.js"></script> <!-- Fichier pour markerClusterer -->
         <script src="js/canvas.js"></script> <!-- Canvas -->
-        <script src="js/reservation.js"></script> <!-- Réservation -->
+        <script src="js/poo_reservation.js"></script> <!-- Réservation -->
     </body>
 </html>

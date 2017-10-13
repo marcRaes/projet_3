@@ -149,10 +149,12 @@ figcaption {
 /* ------------------ */
 /* ==     Maps        */
 /* ------------------ */
+section {
+    position: relative;
+}
 #carte {
     width: 1200px;
     height: 600px;
-    z-index: 1;
 }
 
 article {
@@ -324,4 +326,10 @@ article {
 #messageLocation {
     text-align: center;
     margin: 10px 0;
+}
+
+#compteur {
+    font-size: 2em;
+    font-weight: bold;
+    color: #AD1E22;
 }

@@ -1,7 +1,11 @@
+// Cache la section de location
+document.getElementById("sectionLocation").style.display = "none";
+
+// Objet maps  ==>  La carte Google maps ainsi que les marqueurs
 var maps = {
     lat : 48.875224, // Lattitude de la carte
     long : 2.350479, // Longitude de la carte
-    iconBase : "http://p3.m-raes.fr/images/marqueurs/default_marqueur.png", // Icone de marqueur
+    iconBase : "./images/marqueurs/default_marqueur.png", // Icone de marqueur
     tableauMarqueur : [], // Tableau ou serons inserer les differents marqueurs, cela servira à les rassembler (marker Clusterer)
 
     // Méthode d'insertion de la carte Google
@@ -19,15 +23,15 @@ var maps = {
             icon: this.iconBase,
             position : positionStation // Désigne la position de chaque marqueurs
         });
-        this.tableauMarqueur.push(marqueur);
+        this.tableauMarqueur.push(marqueur); // Stocke les marqueurs dans un tableau qui sera utiliser par "markerClusterer"
     },
 
     // Méthode pour l'attribution d'une image de marqueur pour les stations ouverte et fermer
     iconMarqueur : function(statusStation) {
         if(statusStation === "OPEN") {
-            this.iconBase = "http://p3.m-raes.fr/images/marqueurs/marqueur_ouvert.png";
+            this.iconBase = "./images/marqueurs/marqueur_ouvert.png";
         } else if(statusStation === "CLOSED") {
-            this.iconBase = "http://p3.m-raes.fr/images/marqueurs/marqueur_fermer.png";
+            this.iconBase = "./images/marqueurs/marqueur_fermer.png";
         }
     },
 
@@ -35,7 +39,7 @@ var maps = {
     regroupementMarqueurs : function() {
         marqueurCluster = new MarkerClusterer(map, this.tableauMarqueur,
         {
-            imagePath : "http://p3.m-raes.fr/images/marqueurs/m"
+            imagePath : "./images/marqueurs/m"
         });
     },
 
@@ -49,6 +53,7 @@ var maps = {
     }
 };
 
+// Objet Station
 var station = {
     // Attributs
     nom : "",
@@ -134,9 +139,9 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
         // Ajoute un évenement lors du clic sur les marqueurs
         google.maps.event.addListener(marqueur, "click", function() {
 
-            // On vérifie que le canvas ainsi que le message d'erreur sont cacher
-            document.getElementById("containerCanvas").style.display = "none";
-            document.getElementById("messageErreur").style.display = "none";
+            // On cache les différentes partie de la page
+            document.getElementById("messageErreur").style.display = "none"; // Les message d'erreur
+            document.getElementById("containerCanvas").style.display = "none"; // Le canvas
 
             // Apparition du bloc contenant les infos de la station selectionner
             document.getElementById("infoStation").style.display = "block";
@@ -159,6 +164,7 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
     document.getElementById("bouttonReservation").querySelector("button").addEventListener("click", function(){
         if(station.autorisation) { // Si l'autorisation de reserver est à true
             document.getElementById("containerCanvas").style.display = "block"; // Le canvas apparait
+            document.getElementById("containerCanvas").querySelector("strong").innerHTML = station.nom; // Insertion du nom de la station
             window.scrollTo(0,900); // On fait remonter la page pour voir apparaitre le canvas
         } else { // Si l'autorisation est à false
             document.getElementById("messageErreur").style.display = "block"; // On fait apparaitre le message d'erreur
