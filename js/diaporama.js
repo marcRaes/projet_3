@@ -1,38 +1,44 @@
-var items, length, deg, z, move = 0; // Déclaration des variables
+var diaporama = {
+    items : document.getElementsByClassName("item"),
+    i : 0,
 
-function rotate(direction) {
-    move += direction;
+    // Méthode qui récupére les touches du clavier et actionne le diaporama en fonction de la touche
+    infosClavier : function(e) {
+        if(e.keyCode === 39) {
+            document.addEventListener("keydown", this.suivant()); // Appui sur la touche =>
+        } else if(e.keyCode === 37) {
+            document.addEventListener("keydown", this.precedent()); // Appui sur la touche <=
+        }
+    },
 
-    for(var i = 0; i < length; i++) {
-        items[i].style.transform = "rotateY(" + (deg * (i+move)) + "deg) translateZ(" + z + "px)";
+    // Méthode qui fait fonctionner le diaporama en avant
+    suivant : function() {
+        this.items[this.i].style.opacity = "0"; // Fait disparaître l'image active
+        if(this.i === 4) { // Si le diaporama est à la dernière image
+            this.i = 0; // On repasse l'attribut à 0 pour faire réapparaître la première image
+        } else { // Sinon on passe à l'image suivante
+            this.i++; // En augmentant de 1 l'attribut
+        }
+        this.items[this.i].style.opacity = "1"; // Fait apparaître l'image suivante
+    },
+
+    // Méthode qui fait fonctionner le diaporama en arrière
+    precedent : function() {
+        this.items[this.i].style.opacity = "0"; // Fait disparaître l'image active
+        if(this.i === 0) { // Si le diaporama est à la premiére image
+            this.i = 4; // On passe l'attribut à 4 pour faire réapparaître l'image précedente
+        } else { // Sinon on passe à l'image precedente
+            this.i--; // En diminuant de 1 la valeur de l'attribut
+        }
+        this.items[this.i].style.opacity = "1"; // Fait apparaître l'image précedente
     }
 }
 
-function load() {
-    items = document.getElementsByClassName("item");
-    length = items.length; // Nombre d'élements present dans le diaporama
+// Le boutton droit appel la méthode "suivant"
+document.getElementById("bouttonDroit").addEventListener("click", diaporama.suivant.bind(diaporama));
 
-    deg = 360 / length; // Calcule à combien de degré devra tourner le diaporama
-    // Calcule de trygonométrie 
-    //moitié de la longueur des faces / tangente(deg)
-    // (Math.PI / 180) ce calcule sert à obtenir le résultat voulu en degré puisque JavaScript fonctionne en radien
-    z = (items[0].offsetWidth / 2) / Math.tan((deg / 2) * (Math.PI / 180));
-
-    for(var i = 0; i < length; i++) {
-        items[i].style.transform = "rotateY(" + (deg * i) + "deg) translateZ(" + z + "px)";
-    }
-}
-
-window.addEventListener('load', load);
-
-// Affiche des informations sur un événement clavier
-function infosClavier(e) {
-    if(e.keyCode === 39) {
-        document.addEventListener("keydown", rotate(-1));
-    } else if(e.keyCode === 37) {
-        document.addEventListener("keydown", rotate(1));
-    }
-}
+// Le boutton gauche appel la méthode "precedent"
+document.getElementById("bouttonGauche").addEventListener("click", diaporama.precedent.bind(diaporama));
 
 // Gestion de l'appui et du relâchement d'une touche du clavier
-document.addEventListener("keydown", infosClavier);
+document.addEventListener("keydown", diaporama.infosClavier.bind(diaporama));

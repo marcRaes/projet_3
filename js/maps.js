@@ -44,9 +44,9 @@ var maps = {
     },
 
     // Street View
-    vueRue : function(positionStation) {
+    vueRue : function() {
         streetView = new google.maps.StreetViewPanorama(document.getElementById("streetView"),{
-            position: positionStation,
+            position: station.positionStation,
             linksControl: false,
             panControl: false
         });
@@ -56,14 +56,15 @@ var maps = {
 // Objet Station
 var station = {
     // Attributs
-    nom : "",
-    adresse : "",
-    etat : "",
-    nbVelo : "",
-    nbAttache : "",
+    nom : null,
+    adresse : null,
+    etat : null,
+    nbVelo : null,
+    nbAttache : null,
+    positionStation : null,
     emplacementDonnees : document.getElementById("listeInfo").querySelectorAll("span"),
     tableauDonnees : [],
-    autorisation : "",
+    autorisation : null,
 
     // Méthode Ajax qui permettra de récuperer la liste des stations velib'
     ajaxGet : function(url, callback) {
@@ -91,13 +92,13 @@ var station = {
         this.etat = donneesStation.status;
         this.nbVelo = donneesStation.available_bikes;
         this.nbAttache = donneesStation.available_bike_stands;
+        this.positionStation = donneesStation.position;
     },
 
     insertionDonneesStation : function() {
         this.tableauDonnees = [this.nom, this.addresse, this.etat, this.nbVelo, this.nbAttache];
         // traitement pour inserer les données
         for(var i = 0; i <= this.emplacementDonnees.length; i++) {
-            this.emplacementDonnees[i].innerHTML = ""; // Vide les données déja insérer
             this.emplacementDonnees[i].innerHTML = this.tableauDonnees[i]; // Insert les données de la station selectionner
         }
     },
@@ -108,14 +109,14 @@ var station = {
             this.etat = "FERMER"; // Traduction du texte
             document.getElementById("etatStation").style.color = "red"; // Le champs d'état de la station sera marquer en rouge
             document.getElementById("veloDispo").style.color = "red"; // Le nombre de velo sera marquer en rouge
-            this.autorisation = false;
+            this.autorisation = false; // Interdit la réservation
         } else if(this.etat === "OPEN") { // Sinon si la Station est ouverte
             this.etat = "OUVERT"; // Traduction du texte
             document.getElementById("etatStation").style.color = ""; // Le champ retrouve sa couleur d'origine
-            this.autorisation = true;
+            this.autorisation = true; // Autorise la réservation
             if(this.nbVelo === 0) {
                 document.getElementById("veloDispo").style.color = "red"; // Le champs sera marquer en rouge
-                this.autorisation = false;
+                this.autorisation = false; // Interdit la réservation
             } else if(this.nbVelo > 0) {
                 document.getElementById("veloDispo").style.color = ""; // Le champ retrouve sa couleur d'origine
             }
@@ -128,13 +129,13 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
     listeStations = JSON.parse(reponse);
 
     // Parcour les données des stations
-    listeStations.forEach(function(infoStation) {
+    listeStations.forEach(function(reponseInfoStation) {
 
         // Appel de la méthode d'attribution d'une icone de marqueur
-        maps.iconMarqueur(infoStation.status);
+        maps.iconMarqueur(reponseInfoStation.status);
 
         // Appel de la méthode initMarqueur pour positionner les marqueurs sur la carte
-       maps.initMarqueur(infoStation.position);
+       maps.initMarqueur(reponseInfoStation.position);
 
         // Ajoute un évenement lors du clic sur les marqueurs
         google.maps.event.addListener(marqueur, "click", function() {
@@ -146,11 +147,8 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
             // Apparition du bloc contenant les infos de la station selectionner
             document.getElementById("infoStation").style.display = "block";
 
-            // insertion vue Street View
-            maps.vueRue(infoStation.position);
-
             // Insertion des données dans l'objet "station"
-            station.traitementDonneesStation(infoStation);
+            station.traitementDonneesStation(reponseInfoStation);
 
             // Verification de l'autorisation de reservation
             station.autorisationReservation();

@@ -32,39 +32,55 @@
                         
             <!-- Explication sur le fonctionnement du service par un diaporama -->
             <div id="diaporama">
-                            
+                    
+                <button id="bouttonGauche"><span class="chevron left"></span></button>
+                    
                 <div id="caroussel">
-            
-                    <p id="bouttonGauche"><button onclick="rotate(1)"><span class="chevron left"></span></button></p>
-                                        
+                                                        
                     <figure class="item">
-                        <img src="images/velib_paris.jpg">
-                                        
+                        <img src="images/carte.png">
+                                                        
                         <figcaption>
-                            Velib' à Paris
+                            Choisissez votre station sur la carte
                         </figcaption>
                     </figure>
-                                                    
+                                                                    
                     <figure class="item">
-                        <img src="images/velib_paris2.jpg">
-                                            
-                        <figcaption>
-                            Velib' à Paris
-                        </figcaption>
-                    </figure>
-                                        
-                    <figure class="item">
-                        <img src="images/velib_paris3.jpg">
-                                            
-                        <figcaption>
-                            Velib' à Paris
-                        </figcaption>
-                    </figure>
-            
-                    <p id="bouttonDroit"><button onclick="rotate(-1)"><span class="chevron right"></span></button></p>
+                        <img src="images/etatStation.png">
                                                             
+                        <figcaption>
+                            Vérifier l'état de la station ainsi que le nombre de vélos disponibles et cliquez sur le bouton de réservation
+                        </figcaption>
+                    </figure>
+                                                        
+                    <figure class="item">
+                        <img src="images/inscrireSignature.png">
+                                                                
+                        <figcaption>
+                            Inscrivez votre signature dans le cadre en dessous, puis "Valider"
+                        </figcaption>
+                    </figure>
+                    
+                    <figure class="item">
+                        <img src="images/reservationValider.png">
+                                                                    
+                        <figcaption>
+                            Votre réservation est prise en compte immédiatement et pour une durée de 20 minutes
+                        </figcaption>
+                    </figure>
+                    
+                    <figure class="item">
+                        <img src="images/voyageVelib.png">
+                                                                        
+                        <figcaption>
+                            Le site de location de Velib' de la ville de Paris vous souhaite une excellente balade
+                        </figcaption>
+                    </figure>
+                                                                        
                 </div>
-                            
+                    
+                <button id="bouttonDroit"><span class="chevron right"></span></button>
+                                    
             </div>
                         
         </section> <!-- /2éme Section "Fonctionnement du service" -->
@@ -79,12 +95,11 @@
             <article>
 
                 <div id="carte"></div> <!-- Div de la carte Google Maps -->
-                <!-- Script d'affichage de la carte -->
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuU5RQy__LmfyR4Q77dkP6JQ-MeCAPdSY&callback=maps.initMap" async defer></script>
 
                 <div id="infoStation"> <!-- Cadre informations sur la station sélectionner -->
 
                     <h1>Informations sur la station :</h1>
+                    
                     <!-- Informations sur la station sélectionner -->
                     <ul id="listeInfo">
                         <li>Nom : <span id="nomStation"> <!-- Nom insérer en JavaScript --> </span></li>
@@ -134,6 +149,7 @@
         <script src="js/diaporama.js"></script> <!-- Diaporama -->
         <script src="js/maps.js"></script> <!-- Carte Maps location velib -->
         <script src="js/markerclusterer.js"></script> <!-- Fichier pour markerClusterer -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuU5RQy__LmfyR4Q77dkP6JQ-MeCAPdSY&callback=maps.initMap" async defer></script> <!-- Script d'affichage de la carte -->
         <script src="js/canvas.js"></script> <!-- Canvas -->
         <script src="js/reservation.js"></script> <!-- Réservation -->
     </body>
