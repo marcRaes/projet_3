@@ -44,9 +44,9 @@ var maps = {
     },
 
     // Street View
-    vueRue : function() {
+    vueRue : function(positionStation) {
         streetView = new google.maps.StreetViewPanorama(document.getElementById("streetView"),{
-            position: station.positionStation,
+            position: positionStation,
             linksControl: false,
             panControl: false
         });
@@ -61,7 +61,6 @@ var station = {
     etat : null,
     nbVelo : null,
     nbAttache : null,
-    positionStation : null,
     emplacementDonnees : document.getElementById("listeInfo").querySelectorAll("span"),
     tableauDonnees : [],
     autorisation : null,
@@ -92,7 +91,6 @@ var station = {
         this.etat = donneesStation.status;
         this.nbVelo = donneesStation.available_bikes;
         this.nbAttache = donneesStation.available_bike_stands;
-        this.positionStation = donneesStation.position;
     },
 
     insertionDonneesStation : function() {
@@ -140,6 +138,9 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
         // Ajoute un évenement lors du clic sur les marqueurs
         google.maps.event.addListener(marqueur, "click", function() {
 
+            // Insertion des données dans l'objet "station"
+            station.traitementDonneesStation(reponseInfoStation);
+
             // On cache les différentes partie de la page
             document.getElementById("messageErreur").style.display = "none"; // Les message d'erreur
             document.getElementById("containerCanvas").style.display = "none"; // Le canvas
@@ -147,8 +148,8 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
             // Apparition du bloc contenant les infos de la station selectionner
             document.getElementById("infoStation").style.display = "block";
 
-            // Insertion des données dans l'objet "station"
-            station.traitementDonneesStation(reponseInfoStation);
+            // insertion vue Street View
+            maps.vueRue(reponseInfoStation.position);
 
             // Verification de l'autorisation de reservation
             station.autorisationReservation();
