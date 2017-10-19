@@ -6,7 +6,7 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <!-- Feuilles de style -->
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
         <link rel="stylesheet" href="css/style.css">
     </head>
 
@@ -16,7 +16,7 @@
 
             <header> <!-- Header de la 1ére Section -->
                 <!-- Logo FontAwesome + titre header -->
-                <i class="fa fa-bicycle logoHeader"></i><h1>Location de velib'</h1>
+                <span class="fa fa-bicycle"></span><h1>Location de velib'</h1>
             </header> <!-- /Header de la 1ére Section -->
 
             <p id="welcomeText">Bienvenue sur le site de location de velib' de la ville de Paris</p>
@@ -27,16 +27,17 @@
             
             <header> <!-- Header de la 2éme Section -->
                 <!-- Logo FontAwesome + titre header -->
-                <i class="fa fa-question-circle logoHeader"></i><h1>Fonctionnement du service</h1>
+                <span class="fa fa-question-circle"></span><h1>Fonctionnement du service</h1>
             </header> <!-- /Header de la 2éme Section -->
                         
             <!-- Explication sur le fonctionnement du service par un diaporama -->
             <div id="diaporama">
                     
-                <button id="bouttonGauche"><span class="chevron left"></span></button>
+                <button id="bouttonGauche"><span class="chevron left"></span></button> <!-- Bouton de navigation droite -->
                     
                 <div id="caroussel">
-                                                        
+
+                    <!-- 1ére image -->
                     <figure class="item">
                         <img src="images/carte.png">
                                                         
@@ -44,7 +45,8 @@
                             Choisissez votre station sur la carte
                         </figcaption>
                     </figure>
-                                                                    
+
+                    <!-- 2éme image -->
                     <figure class="item">
                         <img src="images/etatStation.png">
                                                             
@@ -52,7 +54,8 @@
                             Vérifier l'état de la station ainsi que le nombre de vélos disponibles et cliquez sur le bouton de réservation
                         </figcaption>
                     </figure>
-                                                        
+
+                    <!-- 3éme image -->
                     <figure class="item">
                         <img src="images/inscrireSignature.png">
                                                                 
@@ -60,7 +63,8 @@
                             Inscrivez votre signature dans le cadre en dessous, puis "Valider"
                         </figcaption>
                     </figure>
-                    
+
+                    <!-- 4éme image -->
                     <figure class="item">
                         <img src="images/reservationValider.png">
                                                                     
@@ -68,7 +72,8 @@
                             Votre réservation est prise en compte immédiatement et pour une durée de 20 minutes
                         </figcaption>
                     </figure>
-                    
+
+                    <!-- 5éme image -->
                     <figure class="item">
                         <img src="images/voyageVelib.png">
                                                                         
@@ -79,7 +84,7 @@
                                                                         
                 </div>
                     
-                <button id="bouttonDroit"><span class="chevron right"></span></button>
+                <button id="bouttonDroit"><span class="chevron right"></span></button> <!-- Bouton de navigation gauche -->
                                     
             </div>
                         
@@ -89,7 +94,7 @@
 
             <header> <!-- Header de la 3éme Section -->
                 <!-- Logo FontAwesome + titre header -->
-                <i class="fa fa-compass logoHeader"></i><h1>Louer votre velib'</h1>
+                <span class="fa fa-compass"></span><h1>Louer votre velib'</h1>
             </header> <!-- /Header de la 3éme Section -->
 
             <article>
@@ -113,34 +118,53 @@
                     <div id="streetView"></div> <!-- Div vue Street View -->
 
                     <p id="bouttonReservation"><button>Réserver</button></p> <!-- Boutton de réservation -->
-                    <p id="messageErreur">La réservation est impossible à cette station</p>
+                    <p id="messageErreur" class="message">La réservation est impossible à cette station</p>
 
                 </div> <!-- /Cadre informations sur la station sélectionner -->
 
             </article>
 
+            <!-- Container pour la signature -->
             <div id="containerCanvas">
                 <p>Vous étes sur le point de réserver un vélo à la station : <strong> <!-- Nom de la station insérer en JavaScript --> </strong></p>
-                <canvas id="signature" width="380" height="200"></canvas>
+                <canvas id="signature" width="380" height="200"></canvas> <!-- Canvas -->
 
+                <!-- Bouton du canvas -->
                 <div id="bouttonCanvas">
-                    <p><button id="bouttonValider"><span class="fa fa-check logoBouttonCanvas"></span>Valider</button></p>
-                    <p><button id="bouttonEffacer"><span class="fa fa-eraser logoBouttonCanvas"></span>Effacer</button></p>
+                    <p><button id="bouttonValider"><span class="fa fa-check logoBouttonCanvas"></span>Valider</button></p> <!-- Bouton Valider -->
+                    <p><button id="bouttonEffacer"><span class="fa fa-eraser logoBouttonCanvas"></span>Effacer</button></p> <!-- Bouton Effacer -->
                 </div>
+
             </div>
+
         </section> <!-- /3éme section "Location de velib" -->
+
+        <div id="messageConfirmationLocation" class="message">
+            Votre réservation est bien enregistrer
+        </div>
+
+        <div id="annulationReservation" class="message">
+            Réservation annuler
+        </div>
 
         <section id="sectionLocation"> <!-- 4éme section "Message de location" -->
 
             <header>
-                <i class="fa fa-hourglass-half logoHeader"></i><h1>Location en cours</h1>
+                <span class="fa fa-hourglass-half"></span><h1>Location en cours</h1>
             </header>
+
+            <!-- Message afficher à la fin de la réservation -->
+            <div id="messageFinLocation">
+                Votre réservation à expirer !
+            </div>
 
             <!-- Message afficher lors de la réservation -->
             <div id="messageLocation">
                 Vous venez de réserver 1 vélo à la station : <strong> <!-- Nom de la station insérer en JavaScript --> </strong><br>
                 Votre réservation expirera dans : <br>
                 <div id="compteur"><span id="minutes"></span><span id="secondes"></span></div>
+                <button id="contratLocation" onclick="contrat.ouvertureContrat();">Visualiser mon contrat de location</button><br/>
+                <button id="annulationReservation" onclick="compteur.annulationReservation();">Annuler la réservation</button>
             </div>
 
         </section> <!-- /4éme section "Message de location" -->
@@ -152,5 +176,6 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuU5RQy__LmfyR4Q77dkP6JQ-MeCAPdSY&callback=maps.initMap" async defer></script> <!-- Script d'affichage de la carte -->
         <script src="js/canvas.js"></script> <!-- Canvas -->
         <script src="js/reservation.js"></script> <!-- Réservation -->
+        <script src="js/contrat.js"></script> <!-- Contrat de location -->
     </body>
 </html>

@@ -44,7 +44,7 @@ header h1 {
     font-size: 3vh; /* Taille du titre */
 }
 
-.logoHeader {
+header span.fa {
     font-size: 3em; /* Taille du logo */
 }
 
@@ -62,30 +62,29 @@ header h1 {
 #diaporama {
     position: relative;
     width: 40%;
-    min-width: 350px;
-    margin: 2% auto;
+    min-width: 320px; /* Le diaporama gardera une taille minimum de 320px */
+    margin: 2% auto; /* Centre le diaporama */
 }
 
 #caroussel {
     position: relative;
     width: 85%;
-    height: 35vh;
+    height: 31vh; /* Une hauteur en vh permet de garder le diaporama en bonne hauteur sur chaque résolution */
     margin: 0 auto;
     border: 10px solid #c0c0c0;
     border-radius: 8px;
-    transition: all 2s;
 }
 
 #caroussel figure {
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0;
+    opacity: 0; /* Fait disparaître toute les images */
     transition: all 2s;
 }
 
 #caroussel figure:nth-child(1) {
-    opacity: 1;
+    opacity: 1; /* Fait réaparaître uniquement la premiére image */
 }
 
 #caroussel figure img {
@@ -95,20 +94,40 @@ header h1 {
 
 #caroussel figcaption {
     position: absolute;
-    left: 0; right: 0;
-    top: 70%;
-    background-color: rgba(0, 0, 0, 0.5);
-    font-size: 1.8em;
+    left: 0; right: 0; /* La légende occupera toute la largeur de l'image */
+    background-color: rgba(0, 0, 0, 0.5); /* Fond noir transparent */
     color: #fff;
+    font-size: 3vh;
     font-weight: bold;
     text-align: center;
 }
 
+/*-- Placement des differente légende sur son image --*/
+#caroussel figure:nth-child(1) figcaption {
+    top: 20%; /* 1ére légende */
+}
+
+#caroussel figure:nth-child(2) figcaption {
+    top: 30%; /* 2éme légende */
+}
+
+#caroussel figure:nth-child(3) figcaption {
+    top: 40%; /* 3éme légende */
+}
+
+#caroussel figure:nth-child(4) figcaption {
+    top: 20%; /* 4éme légende */
+}
+
+#caroussel figure:nth-child(5) figcaption {
+    top: 20%; /* 5éme légende */
+}
+
 #diaporama button {
     position: absolute;
-    top: 45%;
+    top: 45%; /* Placement des boutons au centre du diaporama */
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8); /* Couleur de fond des boutons */
     border: none;
     color: #fff;
     height: 40px;
@@ -118,24 +137,21 @@ header h1 {
 }
 
 #bouttonDroit {
-    right: 0;
+    right: -9%; /* Placement du boutton droit */
 }
 
-
 #bouttonGauche {
-    left: 0;
+    left: -9%; /* Placement du boutton gauche */
 }
 
 .chevron::before {
     content: "";
+    position: relative;
+    display: inline-block;
     height: 1em;
     width: 1em;
     border-style: solid;
     border-width: 0.25em 0.25em 0 0;
-    transform: rotate(-45deg);
-    display: inline-block;
-    left: 0.15em;
-	position: relative;
 	top: 0.15em;
 }
 
@@ -157,14 +173,17 @@ section {
 }
 
 #carte {
-    width: 1200px;
+    /* Dimensions de la carte */
+    width: 100%; /* La carte prend toute la largeur */
+    max-width: 1200px; /* Elle ne dépassera pas les 1200px */
     height: 600px;
 }
 
 article {
+    /* Positionnement du cadre d'informations sur la station sur le coté de la carte */
     display: flex;
     justify-content: center;
-    margin: 30px 0;
+    margin: 30px auto;
 }
 
 /* --------------------------- */
@@ -175,7 +194,7 @@ article {
     background-color: #3c304f;
     margin-left: 30px;
     padding: 10px;
-    display: none;
+    display: none; /* Sera affiché en javascript */
 }
 
 #infoStation h1 {
@@ -196,18 +215,18 @@ article {
     color: #EAF8F2;
 }
 
-#listeInfo li + li {
+#listeInfo li + li { /* Sélectionne toutes les balises li sauf la premiére */
     margin-top: 15px;
 }
 
-#listeInfo span {
+#listeInfo span { /* Information afficher en javascript */
     font-size: 1em;
     line-height: 1.5em;
     font-weight: 600;
     color: #66D9EF;
 }
 
-#streetView {
+#streetView { /* Cadre de la vue StreetView */
     width: 300px;
     height: 200px;
     margin: 10px auto;
@@ -249,7 +268,7 @@ article {
     text-shadow: -2px -2px 1px #000;
 }
 
-#messageErreur {
+.message {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
@@ -257,12 +276,17 @@ article {
     display: none; /* Le message sera afficher en JavaScript */
 }
 
+#messageConfirmationLocation, #annulationReservation {
+    width: 500px;
+    margin: 20px auto;
+}
+
 /* -------------------- */
 /* ==     Canvas        */
 /* -------------------- */
 #containerCanvas {
     margin: 20px auto;
-    display: none;
+    display: none; /* Sera affiché en javascript */
 }
 
 #containerCanvas p {
@@ -290,6 +314,7 @@ article {
     font-size: 1em;
 }
 
+/* Personnalisation le premier bouton du canvas */
 #bouttonCanvas p:first-child button {
     background-color: #0d00ff;
     border-color: #080097;
@@ -300,6 +325,11 @@ article {
     border-color: #0d00ff;
 }
 
+#bouttonCanvas p:first-child span.logoBouttonCanvas {
+    color: #00FF40;
+}
+
+/* Personnalisation le second bouton du canvas */
 #bouttonCanvas p:last-child button {
     margin-left: 15px;
     background-color: #3a34a5;
@@ -316,10 +346,6 @@ article {
     margin-right: 5px;
 }
 
-#bouttonCanvas p:first-child span.logoBouttonCanvas {
-    color: #00FF40;
-}
-
 #bouttonCanvas p:last-child span.logoBouttonCanvas {
     color: #FF4FC4;
 }
@@ -327,23 +353,91 @@ article {
 /* ------------------------------ */
 /* ==     Section location        */
 /* ------------------------------ */
-#messageLocation {
+#sectionLocation, #messageFinLocation {
+    display: none; /* Sera affiché en javascript */
+}
+
+#messageLocation, #messageFinLocation {
     text-align: center;
     margin: 10px 0;
 }
 
 #compteur {
-    font-size: 2em;
+    font-size: 2.2em;
     font-weight: bold;
     color: #AD1E22;
+    margin: 20px 0;
+}
+
+#messageLocation button {
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+#contratLocation {
+    border: none;
+    background: none;
+    text-decoration: underline;
+    color: #15336B;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#contratLocation:hover {
+    color: #4D77C4;
+}
+
+#annulationReservation {
+    width: 200px;
+    padding: 5px;
+    font-weight: bold;
+}
+#annulationReservation:hover {
+    box-shadow: 0 0 10px #000;
 }
 
 /* --------------------------- */
 /* ==     Media Queries        */
 /* --------------------------- */
+/* Tablettes */
+@media screen and (max-width: 979px) {
+    /* ----------------------- */
+    /* ==     Diaporama        */
+    /* ----------------------- */
+    #diaporama {
+        width: 80%;
+    }
+}
+
+/* Smartphones */
 @media screen and (max-width: 480px) {
-    /*-- Maps --*/
+    /* ------------------ */
+    /* ==     Maps        */
+    /* ------------------ */
     #carte {
         height: 300px;
+    }
+
+    article {
+        flex-direction: column; /* Place le cadre d'information de la station sous la carte */
+    }
+
+    /* --------------------------- */
+    /* ==     Cadre Station        */
+    /* --------------------------- */
+    #infoStation {
+        width: 94.5%;
+        margin-left: 0;
+    }
+
+    #listeInfo {
+        text-align: center;
+    }
+
+    /* Augmente la vue StreetView */
+    #streetView {
+        width: 350px;
+        height: 250px;
     }
 }

@@ -1,6 +1,3 @@
-// Cache la section de location
-document.getElementById("sectionLocation").style.display = "none";
-
 // Objet maps  ==>  La carte Google maps ainsi que les marqueurs
 var maps = {
     lat : 48.875224, // Lattitude de la carte
@@ -16,6 +13,15 @@ var maps = {
         });
     },
 
+    // Méthode pour l'attribution d'une image de marqueur pour les stations ouverte et fermer
+    iconMarqueur : function(statusStation) {
+        if(statusStation === "OPEN") {
+            this.iconBase = "./images/marqueurs/marqueur_ouvert.png";
+        } else if(statusStation === "CLOSED") {
+            this.iconBase = "./images/marqueurs/marqueur_fermer.png";
+        }
+    },
+    
     // Méthode d'integration des marqueurs sur la carte Google
     initMarqueur : function(positionStation) {
         marqueur = new google.maps.Marker({
@@ -26,20 +32,11 @@ var maps = {
         this.tableauMarqueur.push(marqueur); // Stocke les marqueurs dans un tableau qui sera utiliser par "markerClusterer"
     },
 
-    // Méthode pour l'attribution d'une image de marqueur pour les stations ouverte et fermer
-    iconMarqueur : function(statusStation) {
-        if(statusStation === "OPEN") {
-            this.iconBase = "./images/marqueurs/marqueur_ouvert.png";
-        } else if(statusStation === "CLOSED") {
-            this.iconBase = "./images/marqueurs/marqueur_fermer.png";
-        }
-    },
-
     // Méthode pour le regroupement de marqueurs
     regroupementMarqueurs : function() {
         marqueurCluster = new MarkerClusterer(map, this.tableauMarqueur,
         {
-            imagePath : "./images/marqueurs/m"
+            imagePath : "./images/marqueurs/m",
         });
     },
 
@@ -56,14 +53,14 @@ var maps = {
 // Objet Station
 var station = {
     // Attributs
-    nom : null,
-    adresse : null,
-    etat : null,
-    nbVelo : null,
-    nbAttache : null,
-    emplacementDonnees : document.getElementById("listeInfo").querySelectorAll("span"),
-    tableauDonnees : [],
-    autorisation : null,
+    nom : null, // Nom de la station
+    adresse : null, // Adresse de la station
+    etat : null, // Etat de la station
+    nbVelo : null, // nb velo à la station
+    nbAttache : null, // nb attache à la station
+    emplacementDonnees : document.getElementById("listeInfo").querySelectorAll("span"), // Endroit ou les données seront inserer au HTML
+    tableauDonnees : null, // Tableau des données de la station
+    autorisation : null, // Attribut d'autorisation de réservation
 
     // Méthode Ajax qui permettra de récuperer la liste des stations velib'
     ajaxGet : function(url, callback) {
@@ -83,22 +80,32 @@ var station = {
         req.send(null);
     },
 
-    // Méthode de traitement des données de la station 
-    
+    // Méthode qui rempli les attributs de données de la station 
     traitementDonneesStation : function(donneesStation) {
+        // Nom
         this.nom = donneesStation.name;
+        // Adresse
         this.addresse = donneesStation.address;
+        // Etat (ouvert ou fermer)
         this.etat = donneesStation.status;
-        this.nbVelo = donneesStation.available_bikes;
+        // Nombre de velo(s)
+        if((sessionStorage.getItem("minutes")) && (compteur.nomStation === this.nom)) { // Si une réservation est en cours dans la même station
+            this.nbVelo = donneesStation.available_bikes - 1; // On enléve un vélo à la station
+        } else { // Sinon
+            this.nbVelo = donneesStation.available_bikes; // On affiche le véritable nombre de vélos disponible
+        }
+        // Nombre d'attaches
         this.nbAttache = donneesStation.available_bike_stands;
     },
 
+    // Méthode pour inserer les données dans la page
     insertionDonneesStation : function() {
-        this.tableauDonnees = [this.nom, this.addresse, this.etat, this.nbVelo, this.nbAttache];
-        // traitement pour inserer les données
-        for(var i = 0; i <= this.emplacementDonnees.length; i++) {
-            this.emplacementDonnees[i].innerHTML = this.tableauDonnees[i]; // Insert les données de la station selectionner
-        }
+        // Insertion des données dans la page
+        document.getElementById("nomStation").innerHTML = this.nom;
+        document.getElementById("adresseStation").innerHTML = this.adresse;
+        document.getElementById("etatStation").innerHTML = this.etat;
+        document.getElementById("veloDispo").innerHTML = this.nbVelo;
+        document.getElementById("attacheDispo").innerHTML = this.nbAttache;
     },
 
     // Méthode qui autorise ou non la réservation
@@ -135,7 +142,7 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
         // Appel de la méthode initMarqueur pour positionner les marqueurs sur la carte
        maps.initMarqueur(reponseInfoStation.position);
 
-        // Ajoute un évenement lors du clic sur les marqueurs
+        // Ajoute un évenement lors du clic sur un marqueur
         google.maps.event.addListener(marqueur, "click", function() {
 
             // Insertion des données dans l'objet "station"
@@ -156,14 +163,16 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
 
             // Insertion des données dans le bloc
             station.insertionDonneesStation();
+
         });
     });
 
     // Evenements pour le clic sur le bouton de reservation
     document.getElementById("bouttonReservation").querySelector("button").addEventListener("click", function(){
+
         if(station.autorisation) { // Si l'autorisation de reserver est à true
-            document.getElementById("containerCanvas").style.display = "block"; // Le canvas apparait
             document.getElementById("containerCanvas").querySelector("strong").innerHTML = station.nom; // Insertion du nom de la station
+            document.getElementById("containerCanvas").style.display = "block"; // Le canvas apparait
             window.scrollTo(0,900); // On fait remonter la page pour voir apparaitre le canvas
         } else { // Si l'autorisation est à false
             document.getElementById("messageErreur").style.display = "block"; // On fait apparaitre le message d'erreur
@@ -171,6 +180,7 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
                 document.getElementById("messageErreur").style.display = "none"; // Le message d'erreur disparait au bout de 5 secondes
             },5000);
         }
+
     });
 
     // Appel de la méthode "marker Clusterer"

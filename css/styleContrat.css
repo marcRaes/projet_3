@@ -1,0 +1,64 @@
+/* ------------------- */
+/* ==   Reset CSS      */
+/*      BODY           */
+/* ------------------- */
+/* --   Reset CSS    -- */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* --   BODY    -- */
+body {
+    width: 100%; /* Le site occupera 100% de la largeur */
+}
+
+/* -------------------- */
+/* ==     HEADER        */
+/* -------------------- */
+header {
+    display: flex; /* rend les élements flexible */
+    align-items: center; /* Centre verticalement le logo et le titre */
+    justify-content: center;
+    padding-left: 5%;
+}
+
+header h1 {
+    padding: 21px 0;
+    margin-left: 20px;
+    font-size: 4vh; /* Taille du titre */
+}
+
+header span.fa {
+    font-size: 3.5em; /* Taille du logo */
+}
+
+/* ---------------------- */
+/* ==     SECTIONS        */
+/* ---------------------- */
+section {
+    margin: 30px 0;
+}
+
+section p {
+    font-size: 1.1em;
+    margin-top: 15px;
+}
+
+section ul {
+    margin-left: 50px;
+}
+
+#locataire {
+    margin: 40px 0;
+}
+
+#locataire p {
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#locataire img {
+    border: 1px dotted #000;
+}
