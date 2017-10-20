@@ -1,3 +1,11 @@
+/* ---------------- */
+/* ==   SOMMAIRE    */
+/* ---------------- */
+
+/* 1- Reset CSS + BODY  */
+/* 2- HEADER  */
+/* 4- Sections */
+
 /* ------------------- */
 /* ==   Reset CSS      */
 /*      BODY           */
@@ -62,5 +70,5 @@ section ul {
 
 #locataire img {
     margin-top: 10px;
-    border: 1px dotted #000;
+    border: 1px dotted #000; /* Bordures pointillées */
 }

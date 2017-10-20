@@ -124,7 +124,7 @@ var compteur = {
     },
 
     // Méthode d'annulation d'une réservation
-    annulationReservation : function() {
+    annulerReservation : function() {
 
         // Fait apparaître le message de confirmation de la suppression
         document.getElementById("annulationReservation").style.display = "block";
@@ -203,4 +203,10 @@ document.getElementById("boutonValider").addEventListener("click", function() {
         // Lance la méthode de lancement de la réservation
         compteur.lancementReservation();
     }
+});
+
+// Evénement lors du clique sur le bouton d'annulation d'une réservation
+document.getElementById("annulation").addEventListener("click", function() {
+    // Lance la méthode d'annulation
+    compteur.annulerReservation();
 });

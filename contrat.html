@@ -4,28 +4,37 @@
         <title>Contrat de location</title>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <!-- Feuilles de style -->
         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/styleContrat.css">
     </head>
 
     <body onload="contrat.affichageSignature();">
 
-        <header>
-            <span class="fa fa-bicycle"></span><h1>Contrat de location</h1>
-        </header>
+        <header> <!-- Header -->
 
-        <section>
+            <!-- Logo FontAwesome + titre header -->
+            <span class="fa fa-bicycle"></span><h1>Contrat de location</h1>
+
+        </header> <!-- /Header -->
+
+        <section> <!-- ARTICLE 1 -->
+
             <h1>ARTICLE 1 - OBJET DU CONTRAT</h1>
-            <p>
+
+            <p> <!-- Paragraphe article -->
                 La prestation « <strong>Location de Vélib'</strong>» est fournies par la ville de Paris, qui est le propriétaire des vélos de location. Les conditions de location font partie 
                 intégrante du contrat de location. <br/>
                 Par sa signature, le locataire confirme avoir lu et intégralement accepté les conditions de location.
-            </p>
-        </section>
+            </p> <!-- /Paragraphe article -->
 
-        <section>
-            <h1>ARTICLE 3 - PRISE D’EFFET, MISE A DISPOSITION ET RECUPERATION</h1>
-            <p>
+        </section> <!-- /ARTICLE 1 -->
+
+        <section> <!-- ARTICLE 2 -->
+
+            <h1>ARTICLE 2 - PRISE D’EFFET, MISE A DISPOSITION ET RECUPERATION</h1>
+
+            <p> <!-- Paragraphe article -->
                 Pour prendre possession d’un vélo, le locataire se présente à la station sélectionner lors de sa réservation et prend possesion d'un vélo.
                 La location prend effet au moment où le locataire prend possession du vélo.
                 Le locataire s’engage à utiliser le vélo avec soin, à pourvoir à son entretien, à régler tous dommages causés à celui-ci,
@@ -36,12 +45,15 @@
                 Le locataire reconnaît avoir reçu la chose louée en bon état de fonctionnement.
                 Seul les personne majeur ont le droit de réserver un vélo.
                 Le locataire est tenu de restituer le vélo à sa station d'origine au terme de la durée de location.
-            </p>
-        </section>
+            </p> <!-- /Paragraphe article -->
 
-        <section>
-            <h1>ARTICLE 5 - UTILISATION</h1>
-            <p>
+        </section> <!-- /ARTICLE 2 -->
+
+        <section> <!-- ARTICLE 3 -->
+
+            <h1>ARTICLE 3 - UTILISATION</h1>
+
+            <p> <!-- Paragraphe article -->
                 Le locataire certifie être apte à pouvoir se servir du matériel qu’il s’engage à utiliser lui-même.
                 De convention expresse entre les parties, le prêt ou la sous-location du matériel est strictement interdite.
                 De convention expresse entre parties, il est strictement interdit au locataire d’intervenir sur le matériel en cas de
@@ -50,35 +62,45 @@
                 réglementations en vigueur.
                 En cas de vol des matériels, le locataire devra avertir sans délai le prestataire ainsi que déposer plainte auprès des autorités
                 habilitées et fournir une photocopie du dépôt de plainte.
-            </p>
-        </section>
+            </p> <!-- /Paragraphe article -->
 
-        <section>
-            <h1>ARTICLE 6 - INTERDICTIONS</h1>
-            <p>
-                <ul>
+        </section> <!-- /ARTICLE 3 -->
+
+        <section> <!-- ARTICLE 4 -->
+            <h1>ARTICLE 4 - INTERDICTIONS</h1>
+
+            <p> <!-- Paragraphe article -->
+
+                <ul> <!-- Liste des interdictions -->
                     <li>De modifier le vélo loué, d’effectuer des réparations importantes ;</li>
                     <li>De sous-louer le vélo ;</li>
                     <li>De transporter un passager ;</li>
                     <li>De prolonger la location sans accord préalable ;</li>
                     <li>D’utiliser le vélo en compétition ou pour une conduite analogue à une compétition.</li>
-                </ul>
-            </p>
-        </section>
+                </ul> <!-- /Liste des interdictions -->
 
-        <section>
-            <h1>ARTICLE 7 – ASSURANCES - RESPONSABILITE CASSE - VOL</h1>
-            <p>
+            </p> <!-- /Paragraphe article -->
+
+        </section> <!-- /ARTICLE 4 -->
+
+        <section> <!-- ARTICLE 5 -->
+
+            <h1>ARTICLE 5 – ASSURANCES - RESPONSABILITE CASSE - VOL</h1>
+
+            <p> <!-- Paragraphe article -->
                 Pour tous vélos loués, le locataire est toujours dénommé comme responsable des dommages corporels et/ou
                 matériels qu’il peut occasionner aux tiers à l’occasion de l’utilisation des vélos loués dont il reconnaît avoir la garde
                 juridique, à partir du moment où il en a pris possession jusqu’à sa restitution.                    
-            </p>
-        </section>
+            </p> <!-- /Paragraphe article -->
 
-        <div id="locataire">
+        </section> <!-- /ARTICLE 5 -->
+
+        <div id="locataire"> <!-- Div pour la signature -->
+
             <p>Le locataire :</p>
-            <p><img src="" id="imgSignature"></p>
-        </div>            
+            <p><img src="" id="imgSignature"></p> <!-- Image de la signature insérée en Javascript -->
+
+        </div> <!-- /Div pour la signature -->  
 
         <script src="js/contrat.js"></script> <!-- Contrat de location -->
     </body>

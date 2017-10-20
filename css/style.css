@@ -371,7 +371,7 @@ article {
     transition: all 0.5s;
 }
 
-#contratLocation button { /* Bouton du contrat de location */
+#contratLocation { /* Bouton du contrat de location */
     border: none;
     background: none;
     text-decoration: underline;
@@ -381,17 +381,17 @@ article {
     margin-bottom: 10px;
 }
 
-#contratLocation button:hover {
+#contratLocation:hover {
     color: #4D77C4;
 }
 
-#annulationReservation button { /* Bouton d'annulation du contrat de location */
+#annulation { /* Bouton d'annulation du contrat de location */
     width: 200px;
     padding: 5px;
     font-weight: 700;
 }
 
-#annulationReservation button:hover {
+#annulation:hover {
     box-shadow: 0 0 10px #000;
 }
 
