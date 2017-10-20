@@ -1,6 +1,11 @@
+/* --------------------------------*/
+/* --   Fichier du diaporama    -- */
+/* --------------------------------*/
+
+// Objet diaporama
 var diaporama = {
-    items : document.getElementsByClassName("item"),
-    i : 0,
+    items : document.getElementsByClassName("item"), // Attribut de sélection des figures
+    imageNum : 0, // Attribut qui permet de parcourir les images
 
     // Méthode qui récupére les touches du clavier et actionne le diaporama en fonction de la touche
     infosClavier : function(e) {
@@ -13,31 +18,31 @@ var diaporama = {
 
     // Méthode qui fait fonctionner le diaporama en avant
     suivant : function() {
-        this.items[this.i].style.opacity = "0"; // Fait disparaître l'image active
-        if(this.i === 4) { // Si le diaporama est à la dernière image
-            this.i = 0; // On repasse l'attribut à 0 pour faire réapparaître la première image
+        this.items[this.imageNum].style.opacity = "0"; // Fait disparaître l'image active
+        if(this.imageNum === 4) { // Si le diaporama est à la dernière image
+            this.imageNum = 0; // On repasse l'attribut à 0 pour faire réapparaître la première image
         } else { // Sinon on passe à l'image suivante
-            this.i++; // En augmentant de 1 l'attribut
+            this.imageNum++; // En augmentant de 1 l'attribut
         }
-        this.items[this.i].style.opacity = "1"; // Fait apparaître l'image suivante
+        this.items[this.imageNum].style.opacity = "1"; // Fait apparaître l'image suivante
     },
 
     // Méthode qui fait fonctionner le diaporama en arrière
     precedent : function() {
-        this.items[this.i].style.opacity = "0"; // Fait disparaître l'image active
-        if(this.i === 0) { // Si le diaporama est à la premiére image
-            this.i = 4; // On passe l'attribut à 4 pour faire réapparaître l'image précedente
-        } else { // Sinon on passe à l'image precedente
-            this.i--; // En diminuant de 1 la valeur de l'attribut
+        this.items[this.imageNum].style.opacity = "0"; // Fait disparaître l'image active
+        if(this.imageNum === 0) { // Si le diaporama est à la première image
+            this.imageNum = 4; // On passe l'attribut à 4 pour faire réapparaître l'image précédente
+        } else { // Sinon on passe à l'image précédente
+            this.imageNum--; // En diminuant de 1 la valeur de l'attribut
         }
-        this.items[this.i].style.opacity = "1"; // Fait apparaître l'image précedente
+        this.items[this.imageNum].style.opacity = "1"; // Fait apparaître l'image précédente
     }
 }
 
-// Le boutton droit appel la méthode "suivant"
+// Le bouton droit appel la méthode "suivant" du diaporama
 document.getElementById("bouttonDroit").addEventListener("click", diaporama.suivant.bind(diaporama));
 
-// Le boutton gauche appel la méthode "precedent"
+// Le bouton gauche appel la méthode "précédent" du diaporama
 document.getElementById("bouttonGauche").addEventListener("click", diaporama.precedent.bind(diaporama));
 
 // Gestion de l'appui et du relâchement d'une touche du clavier

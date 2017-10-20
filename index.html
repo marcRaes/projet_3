@@ -1,12 +1,12 @@
 <!Doctype html>
 <html>
     <head>
-        <title>Location de velib'</title>
+        <title>Location de Vélib'</title>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <!-- Feuilles de style -->
-        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"> <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"> <!-- Police "Open Sans"  -->
         <link rel="stylesheet" href="css/style.css">
     </head>
 
@@ -15,157 +15,185 @@
         <section> <!-- 1ére Section "Bienvenue" -->
 
             <header> <!-- Header de la 1ére Section -->
+
                 <!-- Logo FontAwesome + titre header -->
-                <span class="fa fa-bicycle"></span><h1>Location de velib'</h1>
+                <span class="fa fa-bicycle"></span><h1>Location de Vélib'</h1>
+
             </header> <!-- /Header de la 1ére Section -->
 
-            <p id="welcomeText">Bienvenue sur le site de location de velib' de la ville de Paris</p>
+            <p id="welcomeText">Bienvenue sur le site de location de Vélib' de la ville de Paris</p>
 
         </section> <!-- /1ére Section "Bienvenue" -->
 
         <section> <!-- 2éme Section "Fonctionnement du service" -->
             
             <header> <!-- Header de la 2éme Section -->
+
                 <!-- Logo FontAwesome + titre header -->
                 <span class="fa fa-question-circle"></span><h1>Fonctionnement du service</h1>
+
             </header> <!-- /Header de la 2éme Section -->
                         
             <!-- Explication sur le fonctionnement du service par un diaporama -->
             <div id="diaporama">
                     
                 <button id="bouttonGauche"><span class="chevron left"></span></button> <!-- Bouton de navigation droite -->
-                    
+                
+                <!-- Div caroussel -->
                 <div id="caroussel">
 
                     <!-- 1ére image -->
                     <figure class="item">
+
                         <img src="images/carte.png">
-                                                        
-                        <figcaption>
+                        
+                        <figcaption> <!-- Légende -->
                             Choisissez votre station sur la carte
-                        </figcaption>
-                    </figure>
+                        </figcaption><!-- /Légende -->
+
+                    </figure> <!-- /1ére image -->
 
                     <!-- 2éme image -->
                     <figure class="item">
+
                         <img src="images/etatStation.png">
                                                             
                         <figcaption>
                             Vérifier l'état de la station ainsi que le nombre de vélos disponibles et cliquez sur le bouton de réservation
                         </figcaption>
-                    </figure>
+
+                    </figure> <!-- /2éme image -->
 
                     <!-- 3éme image -->
                     <figure class="item">
+
                         <img src="images/inscrireSignature.png">
                                                                 
-                        <figcaption>
+                        <figcaption> <!-- Légende -->
                             Inscrivez votre signature dans le cadre en dessous, puis "Valider"
-                        </figcaption>
-                    </figure>
+                        </figcaption> <!-- /Légende -->
+
+                    </figure> <!-- /3éme image -->
 
                     <!-- 4éme image -->
                     <figure class="item">
+
                         <img src="images/reservationValider.png">
                                                                     
-                        <figcaption>
+                        <figcaption> <!-- Légende -->
                             Votre réservation est prise en compte immédiatement et pour une durée de 20 minutes
-                        </figcaption>
-                    </figure>
+                        </figcaption> <!-- /Légende -->
+
+                    </figure> <!-- /4éme image -->
 
                     <!-- 5éme image -->
                     <figure class="item">
+
                         <img src="images/voyageVelib.png">
                                                                         
-                        <figcaption>
-                            Le site de location de Velib' de la ville de Paris vous souhaite une excellente balade
-                        </figcaption>
-                    </figure>
+                        <figcaption> <!-- Légende -->
+                            Le site de location de Vélib' de la ville de Paris vous souhaite une excellente balade
+                        </figcaption> <!-- /Légende -->
+
+                    </figure> <!-- /5éme image -->
                                                                         
-                </div>
+                </div> <!-- /Div caroussel -->
                     
                 <button id="bouttonDroit"><span class="chevron right"></span></button> <!-- Bouton de navigation gauche -->
                                     
-            </div>
+            </div> <!-- /Diaporama -->
                         
         </section> <!-- /2éme Section "Fonctionnement du service" -->
 
-        <section> <!-- 3éme section "Location de velib" -->
+        <section> <!-- 3éme section "Location de Vélib" -->
 
             <header> <!-- Header de la 3éme Section -->
+
                 <!-- Logo FontAwesome + titre header -->
-                <span class="fa fa-compass"></span><h1>Louer votre velib'</h1>
+                <span class="fa fa-compass"></span><h1>Louer votre Vélib'</h1>
+
             </header> <!-- /Header de la 3éme Section -->
 
             <article>
 
                 <div id="carte"></div> <!-- Div de la carte Google Maps -->
 
-                <div id="infoStation"> <!-- Cadre informations sur la station sélectionner -->
+                <div id="infoStation"> <!-- Cadre informations sur la station sélectionnée -->
 
                     <h1>Informations sur la station :</h1>
                     
-                    <!-- Informations sur la station sélectionner -->
+                    <!-- Informations sur la station sélectionnée -->
                     <ul id="listeInfo">
-                        <li>Nom : <span id="nomStation"> <!-- Nom insérer en JavaScript --> </span></li>
-                        <li>Adresse : <span id="adresseStation"> <!-- Adresse insérer en JavaScript --> </span></li>
-                        <li>Etat : <span id="etatStation"> <!-- Etat insérer en JavaScript --> </span></li>
-                        <li>Vélos disponibles : <span id="veloDispo"> <!-- Nombre insérer en JavaScript --> </span></li>
-                        <li>Points d'attache disponibles : <span id="attacheDispo"> <!-- Nombre insérer en JavaScript --> </span></li>
+                        <li>Nom : <span id="nomStation"> <!-- Nom inséré en Javascript --> </span></li>
+                        <li>Adresse : <span id="adresseStation"> <!-- Adresse insérer en Javascript --> </span></li>
+                        <li>Etat : <span id="etatStation"> <!-- État inséré en Javascript --> </span></li>
+                        <li>Vélos disponibles : <span id="veloDispo"> <!-- Nombre inséré en Javascript --> </span></li>
+                        <li>Points d'attache disponibles : <span id="attacheDispo"> <!-- Nombre inséré en Javascript --> </span></li>
                     </ul>
-                    <!-- /Informations sur la station sélectionner -->
+                    <!-- /Informations sur la station sélectionnée -->
 
                     <div id="streetView"></div> <!-- Div vue Street View -->
 
-                    <p id="bouttonReservation"><button>Réserver</button></p> <!-- Boutton de réservation -->
-                    <p id="messageErreur" class="message">La réservation est impossible à cette station</p>
+                    <p id="bouttonReservation"><button>Réserver</button></p> <!-- Bouton de réservation -->
+                    <p id="messageErreur" class="message">La réservation est impossible à cette station</p> <!-- Message d'erreur en cas de réservation impossible -->
 
-                </div> <!-- /Cadre informations sur la station sélectionner -->
+                </div> <!-- /Cadre informations sur la station sélectionnée -->
 
             </article>
 
-            <!-- Container pour la signature -->
+            <!-- Cadre signature -->
             <div id="containerCanvas">
-                <p>Vous étes sur le point de réserver un vélo à la station : <strong> <!-- Nom de la station insérer en JavaScript --> </strong></p>
+                <p>Vous étes sur le point de réserver un vélo à la station : <strong> <!-- Nom de la station inséré en Javascript --> </strong></p>
                 <canvas id="signature" width="380" height="200"></canvas> <!-- Canvas -->
 
                 <!-- Bouton du canvas -->
-                <div id="bouttonCanvas">
-                    <p><button id="bouttonValider"><span class="fa fa-check logoBouttonCanvas"></span>Valider</button></p> <!-- Bouton Valider -->
-                    <p><button id="bouttonEffacer"><span class="fa fa-eraser logoBouttonCanvas"></span>Effacer</button></p> <!-- Bouton Effacer -->
+                <div id="boutonCanvas">
+                    <p><button id="boutonValider"><span class="fa fa-check logoBoutonCanvas"></span>Valider</button></p> <!-- Bouton Valider -->
+                    <p><button id="boutonEffacer"><span class="fa fa-eraser logoBoutonCanvas"></span>Effacer</button></p> <!-- Bouton Effacer -->
                 </div>
 
-            </div>
+            </div> <!-- /Cadre signature -->
 
-        </section> <!-- /3éme section "Location de velib" -->
+        </section> <!-- /3éme section "Location de Vélib" -->
 
+        <!-- Message affiché lors d'une réservation -->
         <div id="messageConfirmationLocation" class="message">
             Votre réservation est bien enregistrer
-        </div>
+        </div> <!-- /Message affiché lors d'une réservation -->
 
+        <!-- Message affiché lors de l'annulation d'une réservation -->
         <div id="annulationReservation" class="message">
             Réservation annuler
-        </div>
+        </div> <!-- /Message affiché lors de l'annulation d'une réservation -->
 
         <section id="sectionLocation"> <!-- 4éme section "Message de location" -->
 
-            <header>
+            <header> <!-- Header de la 4éme Section -->
+                
+                <!-- Logo FontAwesome + titre header -->
                 <span class="fa fa-hourglass-half"></span><h1>Location en cours</h1>
-            </header>
 
-            <!-- Message afficher à la fin de la réservation -->
+            </header> <!-- /Header de la 4éme Section -->
+
+            <!-- Message affiché à la fin de la réservation -->
             <div id="messageFinLocation">
                 Votre réservation à expirer !
-            </div>
+            </div> <!-- /Message affiché à la fin de la réservation -->
 
-            <!-- Message afficher lors de la réservation -->
+            <!-- Message affiché durant une réservation -->
             <div id="messageLocation">
-                Vous venez de réserver 1 vélo à la station : <strong> <!-- Nom de la station insérer en JavaScript --> </strong><br>
-                Votre réservation expirera dans : <br>
-                <div id="compteur"><span id="minutes"></span><span id="secondes"></span></div>
-                <button id="contratLocation" onclick="contrat.ouvertureContrat();">Visualiser mon contrat de location</button><br/>
-                <button id="annulationReservation" onclick="compteur.annulationReservation();">Annuler la réservation</button>
-            </div>
+
+                <p>
+                    Vous venez de réserver 1 vélo à la station : <strong> <!-- Nom de la station inséré en Javascript --> </strong><br/>
+                    Votre réservation expirera dans : <br/>
+                </p>
+
+                <div id="compteur"></div> <!-- Div du compte à rebours -->
+
+                <p id="contratLocation"><button onclick="contrat.ouvertureContrat();">Visualiser mon contrat de location</button></p> <!-- Bouton d'affichage du contrat de location -->
+                <p id="annulationReservation"><button onclick="compteur.annulationReservation();">Annuler la réservation</button></p> <!-- Bouton pour l'annulation de la réservation -->
+
+            </div> <!-- /Message affiché durant une réservation -->
 
         </section> <!-- /4éme section "Message de location" -->
 
@@ -177,5 +205,7 @@
         <script src="js/canvas.js"></script> <!-- Canvas -->
         <script src="js/reservation.js"></script> <!-- Réservation -->
         <script src="js/contrat.js"></script> <!-- Contrat de location -->
+        <!-- /Fichiers JavaScript -->
+
     </body>
 </html>

@@ -1,17 +1,21 @@
-// Objet compteur  ==>  Le compte à rebour
+/* ------------------------------------------------------------------------------ */
+/* --   Fichier de mettre en place et de fonctionnement du compte à rebours    -- */
+/* ------------------------------------------------------------------------------ */
+
+// Objet compteur  ==>  Le compte à rebours
 var compteur = {
-    minutes : 20, // Minutes du compte à rebour
-    secondes : 00, // Secondes du compte à rebour
-    minutesElt : null, // Elément minutes (celui qui sera inserer dans le HTML)
-    secondesElt : null, // Elément secondes (celui qui sera inserer dans le HTML)
+    minutes : 20, // Minutes du compte à rebours
+    secondes : 00, // Secondes du compte à rebours
+    minutesElt : null, // Élément minutes (celui qui sera inséré dans le HTML)
+    secondesElt : null, // Éléments secondes (celui qui sera inséré dans le HTML)
     nomStation : null, // Nom de la station de réservation
-    compteARebour : null, // Attribut du compte à rebour
-    compteARebourTerminer : null, // Attribut du compte à rebour terminer
-    annulationReservation : false, // Message de confirmation d'annulation de la reservation
+    compteARebour : null, // Attribut du compte à rebours
+    compteARebourTerminer : null, // Attribut du compte à rebours terminé
+    annulationReservation : false, // Demande de confirmation d'annulation de la réservation
 
     // Méthode lancement d'une réservation
     lancementReservation : function() {
-        // Mis en place des session storage
+        // Mis en place des sessions storage
         sessionStorage.setItem("minutes", this.minutes);
         sessionStorage.setItem("secondes", this.secondes);
         sessionStorage.setItem("nomStation", station.nom);
@@ -19,13 +23,14 @@ var compteur = {
         // Enregistre la session storage du nom de la station dans son attribut
         this.nomStation = sessionStorage.getItem("nomStation");
 
-        // On re-cache les différentes partie de la page sauf la section de location
+        // On recache les différentes parties de la page sauf la section de location
         document.getElementById("infoStation").style.display = "none"; // Le cadre d'info sur les stations
         document.getElementById("containerCanvas").style.display = "none"; // Le canvas
         document.getElementById("sectionLocation").style.display = "block"; // La section de location
 
-        // Affichage et disparition du message de confirmation
+        // Affichage du message de confirmation
         document.getElementById("messageConfirmationLocation").style.display = "block";
+        // Disparition du message de confirmation
         setTimeout(function() {
             document.getElementById("messageConfirmationLocation").style.display = "none";
         }, 3000);
@@ -33,40 +38,57 @@ var compteur = {
         // Insert le nom de la station
         document.getElementById("messageLocation").querySelector("strong").innerHTML = this.nomStation;
 
-        // Lancement du compte à rebour
+        // Lancement du compte à rebours
         this.compteARebour = setInterval("compteur.initCompteur()", 1000);
     },
 
-    // Méthode ré-initialisation du compteur
+    // Méthode ré-initialisation du compte à rebours
     initCompteur : function() {
         if(this.minutes < 10) { // Si il reste moins de 10 minutes
-            this.minutesElt = "0" + this.minutes; // Ajoute un 0 devant les minutes
+            // Ajoute un 0 devant les minutes
+            this.minutesElt = "0" + this.minutes;
         } else {
-            this.minutesElt = this.minutes; // Sinon les minutes s'affichent normalement
+            // Sinon les minutes s'affichent normalement
+            this.minutesElt = this.minutes;
         }
         
         if(this.secondes < 10) { // Si il reste moins de 10 secondes
-            this.secondesElt = "0" + this.secondes; // Ajoute un 0 devant les secondes
+            // Ajoute un 0 devant les secondes
+            this.secondesElt = "0" + this.secondes;
         } else {
-            this.secondesElt = this.secondes; // Sinon les secondes s'affichent normalement
+            // Sinon les secondes s'affichent normalement
+            this.secondesElt = this.secondes;
         }
-        document.getElementById("compteur").innerHTML = this.minutesElt + " : " + this.secondesElt; // Ajout du compte à rebour dans le HTML
 
+        // Insertion du compte à rebours dans le HTML
+        document.getElementById("compteur").innerHTML = this.minutesElt + " : " + this.secondesElt;
+
+        // Lance le fonctionnement du compte à rebours
         this.compteurStart();
     },
 
-    // Méthode de fonctionnement du compteur
+    // Méthode de fonctionnement du compte à rebours
     compteurStart : function() {
-        if((this.minutes >= 0) && (this.secondes > 0)) { // Si secondes est supérieur à 0
+        if((this.minutes >= 0) && (this.secondes > 0)) { // S'il il reste plus de 0 seconde
+
+            // On diminue les secondes
             this.secondes--;
-            sessionStorage.setItem("secondes", this.secondes); // Modification de la session storage
-        } else if((this.minutes > 0) && (this.secondes <= 0)) { // Sinon si les minutes sont superieur à 0 et les secondes inferieur ou égale à 0
-            this.secondes = 59; // On replace les secondes à 59
-            this.minutes--; // On diminue les minutes
+            // Modification de la session storage
+            sessionStorage.setItem("secondes", this.secondes);
+
+        } else if((this.minutes > 0) && (this.secondes <= 0)) { // Sinon si les minutes sont Supérieures à 0 et les secondes inférieures ou égale à 0
+
+            // On replace les secondes à 59
+            this.secondes = 59;
+            // On diminue les minutes
+            this.minutes--;
+
             // Modification des session storage
             sessionStorage.setItem("minutes", this.minutes);
             sessionStorage.setItem("secondes", this.secondes);
-        } else if((this.minutes == 0) && (this.secondes == 0)) { // Sinon si les minutes et les secondes sont égale à 0 (compte a rebour terminer)
+
+        } else if((this.minutes == 0) && (this.secondes == 0)) { // Sinon si les minutes et les secondes sont égales à 0 (compte à rebours terminer)
+
             // Affichage du message de fin de location
             document.getElementById("messageFinLocation").style.display = "block";
 
@@ -78,12 +100,12 @@ var compteur = {
         }
     },
 
-    // Méthode appeler à la fin de la réservation
+    // Méthode appelée à la fin de la réservation
     reservationTerminer : function() {
-        // Arrêt du compte à rebour
+        // Arrêt du compte à rebours
         clearInterval(this.compteARebour);
 
-        // Reset des attributs du compte à rebour
+        // Reset des attributs du compte à rebours
         this.minutes = 20;
         this.secondes = 00;
         this.minutesElt = null;
@@ -95,63 +117,71 @@ var compteur = {
         // Arrêt de l'appel à la méthode
         clearTimeout(this.compteARebourTerminer);
 
-        // Remet en place l'affichage par defaut des blocs
+        // Remets en place l'affichage par défaut des blocs
         document.getElementById("sectionLocation").style.display = "none";
         document.getElementById("messageFinLocation").style.display = "none";
         document.getElementById("messageLocation").style.display = "block";
     },
 
+    // Méthode d'annulation d'une réservation
     annulationReservation : function() {
+
+        // Fait apparaître le message de confirmation de la suppression
         document.getElementById("annulationReservation").style.display = "block";
+        // Le message disparaît après 3 secondes
         setTimeout(function() {
             document.getElementById("annulationReservation").style.display = "none";
         }, 3000);
 
+        // Lance la méthode de fin d'une réservation afin de supprimer les sessions storage et arrêter le compte à rebours
         this.reservationTerminer();
     },
 
-    // Méthode qui vérifie si une réservation est en cours au lancement de la page et lors du rafraichissement
+    // Méthode qui vérifie si une réservation est en cours au lancement de la page et lors du rafraîchissement
     verificationSessionStorage : function() {
-        if (sessionStorage.getItem("minutes")) { // Si une reservation est en cours
-            // Récuperation et stockage des session storage dans les attributs
+        if (sessionStorage.getItem("minutes")) { // Si une réservation est en cours
+            // Récupération et stockage des sessions storage dans les attributs
             this.minutes = sessionStorage.getItem("minutes"); // Minutes
             this.secondes = sessionStorage.getItem("secondes"); // Secondes
             this.nomStation = sessionStorage.getItem("nomStation"); // Nom de la station de réservation
 
-            // Relance le compteur
+            // Relance le compte à rebours
             this.compteARebour = setInterval("compteur.initCompteur()", 1000);
 
             // Insert le nom de la station
-            document.getElementById("messageLocation").querySelector("strong").innerHTML = compteur.nomStation;
+            document.getElementById("messageLocation").querySelector("strong").innerHTML = this.nomStation;
             document.getElementById("sectionLocation").style.display = "block";
-        } else { // Si aucune reservation est en cours
-            // Fait disparaitre le cadre de réservation
+        } else { // Si aucune réservation est en cours
+            // Fait disparaître le cadre de réservation
             document.getElementById("sectionLocation").style.display = "none";
         }
     },
 
     // Méthode qui annule la réservation en cours
     resetReservation : function() {
-        if(this.nomStation != station.nom) {
+        if(this.nomStation != station.nom) { // Si le nom de la station de réservation est différent du nom de la station sélectionnée
+            // Affiche une demande de confirmation
             this.annulationReservation = window.confirm("Cette nouvelle réservation annulera la réservation sur la station : " + this.nomStation +
             "\net enregistrera une nouvelle réservation sur la station " + station.nom);
-        } else {
+        } else { // Sinon les deux noms sont identiques
+            // Affiche une demande de confirmation
             this.annulationReservation = window.confirm("Cette nouvelle réservation remplacera la réservation déja existante sur la station : \n" + this.nomStation);
         }
-        if (this.annulationReservation) {
+
+        if (this.annulationReservation) { // Si l'utilisateur a souhaité supprimer sa réservation en cours
             // Suppression de la session storage
             sessionStorage.clear();
 
-            // Arrêt du decompte
+            // Arrêt du compte à rebours
             clearInterval(this.compteARebour);
 
-            // Reset des attributs du compte à rebour
+            // Reset des attributs du compte à rebours
             this.minutes = 20;
             this.secondes = 00;
             this.minutesElt = null;
             this.secondesElt = null;
 
-            // Lance la méthode de lancement de la reservation
+            // Lance la méthode de lancement d'une réservation
             this.lancementReservation();
         }
     }
@@ -160,17 +190,17 @@ var compteur = {
 // Vérification de l'existence d'une réservation
 compteur.verificationSessionStorage();
 
-// Evenements lors de la validation du Canvas
-document.getElementById("bouttonValider").addEventListener("click", function() {
+// Événements lors de la validation du Canvas
+document.getElementById("boutonValider").addEventListener("click", function() {
     localStorage.setItem("signature", signature.canvas.toDataURL());
-    signature.clearCanvas(); // Efface le CANVAS
+    signature.clearCanvas(); // Efface le Canvas
     
     // Vérification d'une réservation existante
-    if(sessionStorage.getItem("minutes")) { // si une reservation existe
+    if(sessionStorage.getItem("minutes")) { // Si une réservation existe
         // Suppression de la réservation existante
         compteur.resetReservation();
-    } else { // Aucune reservation existe
-        // Lance la méthode de lancement de la reservation
+    } else { // Aucune réservation n'existe
+        // Lance la méthode de lancement de la réservation
         compteur.lancementReservation();
     }
 });

@@ -1,12 +1,16 @@
+/* -------------------------------------------------------------------------- */
+/* --   Fichier de mis en place de la signature numérique dans un canvas   -- */
+/* -------------------------------------------------------------------------- */
+
 // Objet signature  ==>  Le canvas
 var signature = {
     // Attributs
     ecriture : false, // Attribut d'activation de l'écriture
-    canvas : document.getElementById("signature"), // Selection du canvas dans le HTML
+    canvas : document.getElementById("signature"), // Sélection du canvas dans le HTML
     context : null, // Définira le contexte d'utilisation du canvas
     signatureImg : null,
 
-    // Méthode qui traduit l'evenement Touch en Event pour ecrans tactile
+    // Méthode qui traduit l'événement Touch en Évent pour écrans tactiles
     convertTouchEvent : function(ev) {
         var touch, ev_type, mouse_ev;
         touch = ev.targetTouches[0];
@@ -29,7 +33,7 @@ var signature = {
                 ev_type = 'mousemove';
                 break;
             case 'touchend':
-                // S'assure que le doigt à était enlever de la cible
+                // Sassure que le doigt a été enlever de la cible
                 if (ev.changedTouches.length != 1) {
                     return;
                 }
@@ -61,9 +65,9 @@ var signature = {
         this.dispatchEvent(mouse_ev);
     },
 
-    // Méthode qui récupére les coordonées de l'élement de pointage (souris, doigt...)
+    // Méthode qui récupére les coordonnées de l'Élément de pointage (souris, doigt...)
     getMousePos : function(event) {
-        rect = this.canvas.getBoundingClientRect(); // renvoie la taille d'un élément et sa position relative par rapport à la zone d'affichage
+        rect = this.canvas.getBoundingClientRect(); // Renvoie la taille d'un élément et sa position relative par rapport à la zone d'affichage
 
         return{
             x:event.clientX - rect.left,
@@ -71,9 +75,9 @@ var signature = {
         };
     },
 
-    // Méthode qui détermine le déplacement de l'élement de pointage
+    // Méthode qui détermine le déplacement de l'élément de pointage
     deplacementSouris : function(event) {
-        sourisPosition = this.getMousePos(event); // Coordonnées de l'élement de pointage retourner par la méthode "getMousePos"
+        sourisPosition = this.getMousePos(event); // Coordonnées de l'élément de pointage retourner par la méthode "getMousePos"
         positionX = sourisPosition.x; 
         positionY = sourisPosition.y;
         this.dessin(positionX, positionY);
@@ -85,30 +89,30 @@ var signature = {
         this.context.lineWidth = 5; // Largeur du tracer
 
         if(this.ecriture){
-            this.context.lineTo(positionX, positionY); // Désigne le point d'arriver du tracer
+            this.context.lineTo(positionX, positionY); // Désigne le point d'arrivé du tracer
             this.context.stroke(); // Effectue le tracer
         }
     },
 
     // Méthode qui permet de désactiver l'écriture
     desactivationDessin : function() {
-        this.ecriture = false; // Desactive l'écriture dans le canvas
+        this.ecriture = false; // Désactive l'écriture dans le canvas
     },
 
     // Méthode qui active et débute l'écriture dans le canvas
     activationDessin : function() {
         this.ecriture = true; // Active l'écriture sur le canvas
         this.context.beginPath(); // Commence un nouveau chemin de dessin
-        this.context.moveTo(positionX, positionY); // Designe le début du tracer
+        this.context.moveTo(positionX, positionY); // Désigne le début du tracer
     },
 
-    // Méthode qui permet d'éffacer le canvas
+    // Méthode qui permet d'effacer le canvas
     clearCanvas : function() {
-        this.context.clearRect(0, 0, 800, 200); // Reinitialise le canvas
+        this.context.clearRect(0, 0, 800, 200); // Réinitialise le canvas
     }
 }
 
-// Appel des méthodes sur ecrans tactiles
+// Appel des méthodes sur écrans tactiles
 signature.canvas.addEventListener("touchstart", signature.convertTouchEvent);
 signature.canvas.addEventListener("touchmove", signature.convertTouchEvent);
 signature.canvas.addEventListener("touchend", signature.convertTouchEvent);
@@ -119,6 +123,6 @@ signature.canvas.addEventListener("mousemove", signature.deplacementSouris.bind(
 signature.canvas.addEventListener("mouseup", signature.desactivationDessin.bind(signature));
 
 // Appel de la méthode d'effacement du canvas lors de l'appui sur le bouton "effacer"
-document.getElementById("bouttonEffacer").addEventListener("click", function() {
+document.getElementById("boutonEffacer").addEventListener("click", function() {
     signature.clearCanvas();
 });

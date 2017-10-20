@@ -31,7 +31,7 @@ body {
 /* ==     HEADER        */
 /* -------------------- */
 header {
-    display: flex; /* rend les élements flexible */
+    display: flex; /* Rends les éléments flexibles */
     align-items: center; /* Centre verticalement le logo et le titre */
     background-image: linear-gradient(to right, #001A4B, #4d77c4); /* Font dégrader */
     padding-left: 5%;
@@ -52,7 +52,7 @@ header span.fa {
 #welcomeText {
     padding: 15px 5px;
     font-size: 1.15em;
-    font-weight: bold;
+    font-weight: 700;
     text-align: center;
 }
 
@@ -79,12 +79,11 @@ header span.fa {
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0; /* Fait disparaître toute les images */
     transition: all 2s;
 }
 
-#caroussel figure:nth-child(1) {
-    opacity: 1; /* Fait réaparaître uniquement la premiére image */
+#caroussel figure + figure {
+    opacity: 0; /* Fait disparaître toutes les images sauf la première */
 }
 
 #caroussel figure img {
@@ -98,11 +97,11 @@ header span.fa {
     background-color: rgba(0, 0, 0, 0.5); /* Fond noir transparent */
     color: #fff;
     font-size: 3vh;
-    font-weight: bold;
+    font-weight: 600;
     text-align: center;
 }
 
-/*-- Placement des differente légende sur son image --*/
+/*-- Placement des différentes légendes sur son image --*/
 #caroussel figure:nth-child(1) figcaption {
     top: 20%; /* 1ére légende */
 }
@@ -137,11 +136,11 @@ header span.fa {
 }
 
 #bouttonDroit {
-    right: -9%; /* Placement du boutton droit */
+    right: -9%; /* Placement du bouton droit */
 }
 
 #bouttonGauche {
-    left: -9%; /* Placement du boutton gauche */
+    left: -9%; /* Placement du bouton gauche */
 }
 
 .chevron::before {
@@ -151,27 +150,23 @@ header span.fa {
     height: 1em;
     width: 1em;
     border-style: solid;
-    border-width: 0.25em 0.25em 0 0;
+    border-width: 0.25em 0.25em 0 0; /* 2 Bordures pour le chevron */
 	top: 0.15em;
 }
 
 .chevron.right:before {
 	left: -0.15em;
-	transform: rotate(45deg);
+	transform: rotate(45deg); /* Rotation de 45 degré */
 }
 
 .chevron.left:before {
 	left: 0.25em;
-	transform: rotate(-135deg);
+	transform: rotate(-135deg); /* Rotation de -135 degré */
 }
 
 /* ------------------ */
 /* ==     Maps        */
 /* ------------------ */
-section {
-    position: relative;
-}
-
 #carte {
     /* Dimensions de la carte */
     width: 100%; /* La carte prend toute la largeur */
@@ -180,7 +175,7 @@ section {
 }
 
 article {
-    /* Positionnement du cadre d'informations sur la station sur le coté de la carte */
+    /* Positionnement du cadre d'informations sur la station sur le côté de la carte */
     display: flex;
     justify-content: center;
     margin: 30px auto;
@@ -194,7 +189,7 @@ article {
     background-color: #3c304f;
     margin-left: 30px;
     padding: 10px;
-    display: none; /* Sera affiché en javascript */
+    display: none; /* Le cadre sera affiché en Javascript */
 }
 
 #infoStation h1 {
@@ -215,11 +210,11 @@ article {
     color: #EAF8F2;
 }
 
-#listeInfo li + li { /* Sélectionne toutes les balises li sauf la premiére */
+#listeInfo li + li { /* Sélectionne toutes les balises li sauf la première */
     margin-top: 15px;
 }
 
-#listeInfo span { /* Information afficher en javascript */
+#listeInfo span { /* Informations affichées en Javascript */
     font-size: 1em;
     line-height: 1.5em;
     font-weight: 600;
@@ -232,7 +227,7 @@ article {
     margin: 10px auto;
 }
 
-#bouttonReservation {
+#bouttonReservation { /* Bouton de réservation */
     width: 130px;
     height: 40px;
     margin: 30px auto;
@@ -248,7 +243,7 @@ article {
 #bouttonReservation button {
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(#811215, #AD1E22);
+    background-image: linear-gradient(#811215, #AD1E22); /* Dégrader du bouton */
     border: none;
     box-shadow: inset -1px -1px 10px #181717;
     color: #EBE9E9;
@@ -263,7 +258,7 @@ article {
 
 #bouttonReservation button:hover {
     box-shadow: inset 1px 1px 10px #181717;
-    background-image: linear-gradient(#AD1E22, #811215);
+    background-image: linear-gradient(#AD1E22, #811215); /* Dégrader du bouton */
     color: #D6D6D6;
     text-shadow: -2px -2px 1px #000;
 }
@@ -273,7 +268,7 @@ article {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     border-radius: 5px;
-    display: none; /* Le message sera afficher en JavaScript */
+    display: none; /* Le message sera affiché en Javascript */
 }
 
 #messageConfirmationLocation, #annulationReservation {
@@ -286,14 +281,14 @@ article {
 /* -------------------- */
 #containerCanvas {
     margin: 20px auto;
-    display: none; /* Sera affiché en javascript */
+    display: none; /* Le canvas sera affiché en Javascript */
 }
 
 #containerCanvas p {
     text-align: center;
 }
 
-#signature {
+#signature { /* Canvas */
     display: block;
     margin: 10px auto 5px auto;
     border: 1px solid #000;
@@ -301,12 +296,13 @@ article {
     border-radius: 20px;
 }
 
-#bouttonCanvas {
+#boutonCanvas {
+    /* Aligne et centre les boutons "Valider" et "Effacer" du canvas */
     display: flex;
     justify-content: center;
 }
 
-#bouttonCanvas button {
+#boutonCanvas button {
     padding: 8px 15px;
     cursor: pointer;
     margin: 10px 0;
@@ -314,39 +310,39 @@ article {
     font-size: 1em;
 }
 
-/* Personnalisation le premier bouton du canvas */
-#bouttonCanvas p:first-child button {
+/* Personnalise le premier bouton du canvas */
+#boutonCanvas p:first-child button {
     background-color: #0d00ff;
     border-color: #080097;
 }
 
-#bouttonCanvas p:first-child button:hover {
+#boutonCanvas p:first-child button:hover {
     background-color: #080097;
     border-color: #0d00ff;
 }
 
-#bouttonCanvas p:first-child span.logoBouttonCanvas {
+#boutonCanvas p:first-child span.logoBoutonCanvas {
     color: #00FF40;
 }
 
-/* Personnalisation le second bouton du canvas */
-#bouttonCanvas p:last-child button {
+/* Personnalise le second bouton du canvas */
+#boutonCanvas p:last-child button {
     margin-left: 15px;
     background-color: #3a34a5;
     border-color: #35309B;
 }
 
-#bouttonCanvas p:last-child button:hover {
+#boutonCanvas p:last-child button:hover {
     background-color: #2D28A5;
     border-color: #4640C2;
 }
 
-#bouttonCanvas button span {
+#boutonCanvas button span { /* Logo font Awesome */
     font-size: 1.1em;
     margin-right: 5px;
 }
 
-#bouttonCanvas p:last-child span.logoBouttonCanvas {
+#boutonCanvas p:last-child span.logoBoutonCanvas {
     color: #FF4FC4;
 }
 
@@ -354,7 +350,7 @@ article {
 /* ==     Section location        */
 /* ------------------------------ */
 #sectionLocation, #messageFinLocation {
-    display: none; /* Sera affiché en javascript */
+    display: none; /* Informations affichées en Javascript */
 }
 
 #messageLocation, #messageFinLocation {
@@ -362,59 +358,57 @@ article {
     margin: 10px 0;
 }
 
-#compteur {
+#compteur { /* Compte à rebours */
     font-size: 2.2em;
-    font-weight: bold;
+    font-weight: 800;
     color: #AD1E22;
     margin: 20px 0;
 }
 
+/* Boutons de la section réservation */
 #messageLocation button {
     cursor: pointer;
     transition: all 0.5s;
 }
 
-#contratLocation {
+#contratLocation button { /* Bouton du contrat de location */
     border: none;
     background: none;
     text-decoration: underline;
     color: #15336B;
     font-size: 1em;
-    font-weight: bold;
+    font-weight: 400;
     margin-bottom: 10px;
 }
 
-#contratLocation:hover {
+#contratLocation button:hover {
     color: #4D77C4;
 }
 
-#annulationReservation {
+#annulationReservation button { /* Bouton d'annulation du contrat de location */
     width: 200px;
     padding: 5px;
-    font-weight: bold;
+    font-weight: 700;
 }
-#annulationReservation:hover {
+
+#annulationReservation button:hover {
     box-shadow: 0 0 10px #000;
 }
 
 /* --------------------------- */
 /* ==     Media Queries        */
 /* --------------------------- */
-/* Tablettes */
+/* -- Tablettes -- */
 @media screen and (max-width: 979px) {
-    /* ----------------------- */
-    /* ==     Diaporama        */
-    /* ----------------------- */
+    /* -- Diaporama -- */
     #diaporama {
         width: 80%;
     }
 }
 
-/* Smartphones */
+/* -- Smartphones -- */
 @media screen and (max-width: 480px) {
-    /* ------------------ */
-    /* ==     Maps        */
-    /* ------------------ */
+    /* -- Maps -- */
     #carte {
         height: 300px;
     }
@@ -423,9 +417,7 @@ article {
         flex-direction: column; /* Place le cadre d'information de la station sous la carte */
     }
 
-    /* --------------------------- */
-    /* ==     Cadre Station        */
-    /* --------------------------- */
+    /* -- Cadre Station -- */
     #infoStation {
         width: 94.5%;
         margin-left: 0;
@@ -435,7 +427,7 @@ article {
         text-align: center;
     }
 
-    /* Augmente la vue StreetView */
+    /* -- Vue StreetView -- */
     #streetView {
         width: 350px;
         height: 250px;

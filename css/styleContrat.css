@@ -38,6 +38,7 @@ header span.fa {
 /* ---------------------- */
 section {
     margin: 30px 0;
+    padding: 10px;
 }
 
 section p {
@@ -54,11 +55,12 @@ section ul {
 }
 
 #locataire p {
-    font-size: 1.3em;
-    font-weight: bold;
+    font-size: 1.2em;
+    font-weight: 600;
     text-align: center;
 }
 
 #locataire img {
+    margin-top: 10px;
     border: 1px dotted #000;
 }

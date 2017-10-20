@@ -1,14 +1,18 @@
+/* --------------------------------------------------------------------------------------- */
+/* --   Ce fichier rassemble la carte, les marqueurs ainsi que les stations de Vélib'   -- */
+/* --------------------------------------------------------------------------------------- */
+
 // Objet maps  ==>  La carte Google maps ainsi que les marqueurs
 var maps = {
     lat : 48.875224, // Lattitude de la carte
     long : 2.350479, // Longitude de la carte
-    iconBase : "./images/marqueurs/default_marqueur.png", // Icone de marqueur
-    tableauMarqueur : [], // Tableau ou serons inserer les differents marqueurs, cela servira à les rassembler (marker Clusterer)
+    iconBase : "./images/marqueurs/default_marqueur.png", // Icône de marqueur par défaut
+    tableauMarqueur : [], // Tableau où sera inséré les différents marqueurs, cela servira à les rassembler (marker Clusterer)
 
     // Méthode d'insertion de la carte Google
     initMap : function() {
         map = new google.maps.Map(document.getElementById('carte'), {
-            center : { lat: this.lat, lng: this.long}, // Insertion des coordonées de position de la carte
+            center : { lat: this.lat, lng: this.long}, // Insertion des coordonnées de position de la carte
             zoom : 16 // Zoom de la carte
         });
     },
@@ -16,27 +20,27 @@ var maps = {
     // Méthode pour l'attribution d'une image de marqueur pour les stations ouverte et fermer
     iconMarqueur : function(statusStation) {
         if(statusStation === "OPEN") {
-            this.iconBase = "./images/marqueurs/marqueur_ouvert.png";
+            this.iconBase = "./images/marqueurs/marqueur_ouvert.png"; // Stations Ouvertes => Marqueur vert
         } else if(statusStation === "CLOSED") {
-            this.iconBase = "./images/marqueurs/marqueur_fermer.png";
+            this.iconBase = "./images/marqueurs/marqueur_fermer.png"; // Stations Fermer => Marqueur rouge
         }
     },
     
-    // Méthode d'integration des marqueurs sur la carte Google
+    // Méthode d'intégration des marqueurs sur la carte Google
     initMarqueur : function(positionStation) {
         marqueur = new google.maps.Marker({
             map : map,
             icon: this.iconBase,
-            position : positionStation // Désigne la position de chaque marqueurs
+            position : positionStation // Positionne les marqueurs
         });
-        this.tableauMarqueur.push(marqueur); // Stocke les marqueurs dans un tableau qui sera utiliser par "markerClusterer"
+        this.tableauMarqueur.push(marqueur); // Stocke les marqueurs dans un tableau qui sera utilisé par "markerClusterer"
     },
 
     // Méthode pour le regroupement de marqueurs
     regroupementMarqueurs : function() {
         marqueurCluster = new MarkerClusterer(map, this.tableauMarqueur,
         {
-            imagePath : "./images/marqueurs/m",
+            imagePath : "./images/marqueurs/m", // Icônes du markerClusterer 
         });
     },
 
@@ -56,19 +60,18 @@ var station = {
     nom : null, // Nom de la station
     adresse : null, // Adresse de la station
     etat : null, // Etat de la station
-    nbVelo : null, // nb velo à la station
-    nbAttache : null, // nb attache à la station
-    emplacementDonnees : document.getElementById("listeInfo").querySelectorAll("span"), // Endroit ou les données seront inserer au HTML
-    tableauDonnees : null, // Tableau des données de la station
+    nbVelo : null, // Nombre(s) de vélo(s) à la station
+    nbAttache : null, // Nombre(s) d'attache(s) à la station
+    emplacementDonnees : document.getElementById("listeInfo").querySelectorAll("span"), // Endroit où les données seront insérer au HTML
     autorisation : null, // Attribut d'autorisation de réservation
 
-    // Méthode Ajax qui permettra de récuperer la liste des stations velib'
+    // Méthode Ajax qui permettra de récupérer la liste des stations Vélib'
     ajaxGet : function(url, callback) {
         req = new XMLHttpRequest();
         req.open("GET", url);
         req.addEventListener("load", function() {
             if (req.status >= 200 && req.status < 400) {
-                // Appelle la fonction callback en lui passant la réponse de la requête
+                // Appelle de "callback" en lui passant la réponse de la requête
                 callback(req.responseText);
             } else {
                 console.error(req.status + " " + req.statusText + " " + url);
@@ -80,7 +83,7 @@ var station = {
         req.send(null);
     },
 
-    // Méthode qui rempli les attributs de données de la station 
+    // Méthode qui remplit les attributs de données de la station
     traitementDonneesStation : function(donneesStation) {
         // Nom
         this.nom = donneesStation.name;
@@ -90,15 +93,15 @@ var station = {
         this.etat = donneesStation.status;
         // Nombre de velo(s)
         if((sessionStorage.getItem("minutes")) && (compteur.nomStation === this.nom)) { // Si une réservation est en cours dans la même station
-            this.nbVelo = donneesStation.available_bikes - 1; // On enléve un vélo à la station
+            this.nbVelo = donneesStation.available_bikes - 1; // On enlève un vélo à la station
         } else { // Sinon
             this.nbVelo = donneesStation.available_bikes; // On affiche le véritable nombre de vélos disponible
         }
-        // Nombre d'attaches
+        // Nombre(s) d'attache(s)
         this.nbAttache = donneesStation.available_bike_stands;
     },
 
-    // Méthode pour inserer les données dans la page
+    // Méthode pour insérer les données dans la page
     insertionDonneesStation : function() {
         // Insertion des données dans la page
         document.getElementById("nomStation").innerHTML = this.nom;
@@ -110,74 +113,100 @@ var station = {
 
     // Méthode qui autorise ou non la réservation
     autorisationReservation : function() {
-        if(this.etat === "CLOSED") { // Si la Station est fermer
-            this.etat = "FERMER"; // Traduction du texte
-            document.getElementById("etatStation").style.color = "red"; // Le champs d'état de la station sera marquer en rouge
-            document.getElementById("veloDispo").style.color = "red"; // Le nombre de velo sera marquer en rouge
-            this.autorisation = false; // Interdit la réservation
+        if(this.etat === "CLOSED") { // Si la station est fermée
+
+            // Traduction du texte
+            this.etat = "FERMER";
+            // Le champ d'état de la station sera marqué en rouge
+            document.getElementById("etatStation").style.color = "red";
+            // Le nombre de vélo sera marqué en rouge
+            document.getElementById("veloDispo").style.color = "red";
+            // Interdit la réservation
+            this.autorisation = false;
+
         } else if(this.etat === "OPEN") { // Sinon si la Station est ouverte
-            this.etat = "OUVERT"; // Traduction du texte
-            document.getElementById("etatStation").style.color = ""; // Le champ retrouve sa couleur d'origine
-            this.autorisation = true; // Autorise la réservation
-            if(this.nbVelo === 0) {
-                document.getElementById("veloDispo").style.color = "red"; // Le champs sera marquer en rouge
-                this.autorisation = false; // Interdit la réservation
+
+            // Traduction du texte
+            this.etat = "OUVERT";
+            // Le champ retrouve sa couleur d'origine
+            document.getElementById("etatStation").style.color = "";
+            // Autorise la réservation
+            this.autorisation = true;
+
+            if(this.nbVelo === 0) { // Si le nombre de vélos est à 0
+
+                // Le champ sera marqué en rouge
+                document.getElementById("veloDispo").style.color = "red";
+                // Interdit la réservation
+                this.autorisation = false;
+
             } else if(this.nbVelo > 0) {
-                document.getElementById("veloDispo").style.color = ""; // Le champ retrouve sa couleur d'origine
+
+                // Le champ retrouve sa couleur d'origine
+                document.getElementById("veloDispo").style.color = "";
+
             }
         }
     }
 };
 
-// Appel de la méthode Ajax et récuperation de la liste des stations
+// Appel de la méthode Ajax et récupération de la liste des stations
 station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=8d964b828792e1a92da605f34933f01cc0f27098", function(reponse) {
     listeStations = JSON.parse(reponse);
 
-    // Parcour les données des stations
+    // Parcours les données des stations
     listeStations.forEach(function(reponseInfoStation) {
 
-        // Appel de la méthode d'attribution d'une icone de marqueur
+        // Appel de la méthode d'attribution d'une icône de marqueur
         maps.iconMarqueur(reponseInfoStation.status);
 
         // Appel de la méthode initMarqueur pour positionner les marqueurs sur la carte
-       maps.initMarqueur(reponseInfoStation.position);
+        maps.initMarqueur(reponseInfoStation.position);
 
-        // Ajoute un évenement lors du clic sur un marqueur
+        // Ajoute un événement lors du clic sur un marqueur
         google.maps.event.addListener(marqueur, "click", function() {
 
             // Insertion des données dans l'objet "station"
             station.traitementDonneesStation(reponseInfoStation);
 
-            // On cache les différentes partie de la page
-            document.getElementById("messageErreur").style.display = "none"; // Les message d'erreur
+            // On cache les différentes parties de la page
+            document.getElementById("messageErreur").style.display = "none"; // Les messages d'erreur
             document.getElementById("containerCanvas").style.display = "none"; // Le canvas
 
-            // Apparition du bloc contenant les infos de la station selectionner
+            // Apparition du bloc contenant les infos de la station sélectionnée
             document.getElementById("infoStation").style.display = "block";
 
-            // insertion vue Street View
+            // Insertion vue Street View
             maps.vueRue(reponseInfoStation.position);
 
-            // Verification de l'autorisation de reservation
+            // Vérification de l'autorisation de réservation
             station.autorisationReservation();
 
             // Insertion des données dans le bloc
             station.insertionDonneesStation();
 
-        });
-    });
+        }); // Fin événement clic marqueur
+    }); // Fermeture de la boucle pour le parcours des données des stations
 
-    // Evenements pour le clic sur le bouton de reservation
+    // Événements pour le clic sur le bouton de réservation
     document.getElementById("bouttonReservation").querySelector("button").addEventListener("click", function(){
 
-        if(station.autorisation) { // Si l'autorisation de reserver est à true
-            document.getElementById("containerCanvas").querySelector("strong").innerHTML = station.nom; // Insertion du nom de la station
-            document.getElementById("containerCanvas").style.display = "block"; // Le canvas apparait
-            window.scrollTo(0,900); // On fait remonter la page pour voir apparaitre le canvas
+        if(station.autorisation) { // Si l'autorisation de réservation est à true
+
+            // Insertion du nom de la station
+            document.getElementById("containerCanvas").querySelector("strong").innerHTML = station.nom;
+            // Le canvas apparaît
+            document.getElementById("containerCanvas").style.display = "block";
+            // Fait remonter la page pour voir apparaître le canvas
+            window.scrollTo(0,900);
+
         } else { // Si l'autorisation est à false
-            document.getElementById("messageErreur").style.display = "block"; // On fait apparaitre le message d'erreur
+
+            // On fait apparaître le message d'erreur
+            document.getElementById("messageErreur").style.display = "block";
+            // Le message d'erreur disparaît au bout de 5 secondes
             setTimeout(function() {
-                document.getElementById("messageErreur").style.display = "none"; // Le message d'erreur disparait au bout de 5 secondes
+                document.getElementById("messageErreur").style.display = "none";
             },5000);
         }
 
