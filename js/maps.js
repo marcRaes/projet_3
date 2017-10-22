@@ -3,7 +3,7 @@
 /* --------------------------------------------------------------------------------------- */
 
 // Objet maps  ==>  La carte Google maps ainsi que les marqueurs
-var maps = {
+var Maps = {
     lat : 48.875224, // Lattitude de la carte
     long : 2.350479, // Longitude de la carte
     iconBase : "./images/marqueurs/default_marqueur.png", // Icône de marqueur par défaut
@@ -55,7 +55,7 @@ var maps = {
 };
 
 // Objet Station
-var station = {
+var Station = {
     // Attributs
     nom : null, // Nom de la station
     adresse : null, // Adresse de la station
@@ -92,7 +92,7 @@ var station = {
         // Etat (ouvert ou fermer)
         this.etat = donneesStation.status;
         // Nombre de velo(s)
-        if((sessionStorage.getItem("minutes")) && (compteur.nomStation === this.nom)) { // Si une réservation est en cours dans la même station
+        if((sessionStorage.getItem("minutes")) && (Compteur.nomStation === this.nom)) { // Si une réservation est en cours dans la même station
             this.nbVelo = donneesStation.available_bikes - 1; // On enlève un vélo à la station
         } else { // Sinon
             this.nbVelo = donneesStation.available_bikes; // On affiche le véritable nombre de vélos disponible
@@ -151,23 +151,23 @@ var station = {
 };
 
 // Appel de la méthode Ajax et récupération de la liste des stations
-station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=8d964b828792e1a92da605f34933f01cc0f27098", function(reponse) {
+Station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=8d964b828792e1a92da605f34933f01cc0f27098", function(reponse) {
     listeStations = JSON.parse(reponse);
 
     // Parcours les données des stations
     listeStations.forEach(function(reponseInfoStation) {
 
         // Appel de la méthode d'attribution d'une icône de marqueur
-        maps.iconMarqueur(reponseInfoStation.status);
+        Maps.iconMarqueur(reponseInfoStation.status);
 
         // Appel de la méthode initMarqueur pour positionner les marqueurs sur la carte
-        maps.initMarqueur(reponseInfoStation.position);
+        Maps.initMarqueur(reponseInfoStation.position);
 
         // Ajoute un événement lors du clic sur un marqueur
         google.maps.event.addListener(marqueur, "click", function() {
 
             // Insertion des données dans l'objet "station"
-            station.traitementDonneesStation(reponseInfoStation);
+            Station.traitementDonneesStation(reponseInfoStation);
 
             // On cache les différentes parties de la page
             document.getElementById("messageErreur").style.display = "none"; // Les messages d'erreur
@@ -177,13 +177,13 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
             document.getElementById("infoStation").style.display = "block";
 
             // Insertion vue Street View
-            maps.vueRue(reponseInfoStation.position);
+            Maps.vueRue(reponseInfoStation.position);
 
             // Vérification de l'autorisation de réservation
-            station.autorisationReservation();
+            Station.autorisationReservation();
 
             // Insertion des données dans le bloc
-            station.insertionDonneesStation();
+            Station.insertionDonneesStation();
 
         }); // Fin événement clic marqueur
     }); // Fermeture de la boucle pour le parcours des données des stations
@@ -191,10 +191,10 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
     // Événements pour le clic sur le bouton de réservation
     document.getElementById("bouttonReservation").querySelector("button").addEventListener("click", function(){
 
-        if(station.autorisation) { // Si l'autorisation de réservation est à true
+        if(Station.autorisation) { // Si l'autorisation de réservation est à true
 
             // Insertion du nom de la station
-            document.getElementById("containerCanvas").querySelector("strong").innerHTML = station.nom;
+            document.getElementById("containerCanvas").querySelector("strong").innerHTML = Station.nom;
             // Le canvas apparaît
             document.getElementById("containerCanvas").style.display = "block";
             // Fait remonter la page pour voir apparaître le canvas
@@ -213,5 +213,5 @@ station.ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=paris&apiKey=
     });
 
     // Appel de la méthode "marker Clusterer"
-    maps.regroupementMarqueurs();
+    Maps.regroupementMarqueurs();
 });

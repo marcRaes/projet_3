@@ -3,7 +3,7 @@
 /* ----------------------------------------------------------- */
 
 // Objet contrat
-var contrat = {
+var Contrat = {
     // Attributs
     width : null,
     height : null,
@@ -36,5 +36,5 @@ var contrat = {
 // Evénement lors du clique sur le bouton du contrat de location
 document.getElementById("contratLocation").addEventListener("click", function() {
     // Lance la méthode d'ouverture du contrat
-    contrat.ouvertureContrat();
+    Contrat.ouvertureContrat();
 });

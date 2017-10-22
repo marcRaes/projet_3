@@ -3,7 +3,7 @@
 /* ------------------------------------------------------------------------------ */
 
 // Objet compteur  ==>  Le compte à rebours
-var compteur = {
+var Compteur = {
     minutes : 20, // Minutes du compte à rebours
     secondes : 00, // Secondes du compte à rebours
     minutesElt : null, // Élément minutes (celui qui sera inséré dans le HTML)
@@ -18,7 +18,7 @@ var compteur = {
         // Mis en place des sessions storage
         sessionStorage.setItem("minutes", this.minutes);
         sessionStorage.setItem("secondes", this.secondes);
-        sessionStorage.setItem("nomStation", station.nom);
+        sessionStorage.setItem("nomStation", Station.nom);
 
         // Enregistre la session storage du nom de la station dans son attribut
         this.nomStation = sessionStorage.getItem("nomStation");
@@ -39,7 +39,7 @@ var compteur = {
         document.getElementById("messageLocation").querySelector("strong").innerHTML = this.nomStation;
 
         // Lancement du compte à rebours
-        this.compteARebour = setInterval("compteur.initCompteur()", 1000);
+        this.compteARebour = setInterval("Compteur.initCompteur()", 1000);
     },
 
     // Méthode ré-initialisation du compte à rebours
@@ -96,7 +96,7 @@ var compteur = {
             document.getElementById("messageLocation").style.display = "none";
 
             // Appel de la méthode "reservationTerminer"
-            this.compteARebourTerminer = setTimeout("compteur.reservationTerminer()", 4000);
+            this.compteARebourTerminer = setTimeout("Compteur.reservationTerminer()", 4000);
         }
     },
 
@@ -146,7 +146,7 @@ var compteur = {
             this.nomStation = sessionStorage.getItem("nomStation"); // Nom de la station de réservation
 
             // Relance le compte à rebours
-            this.compteARebour = setInterval("compteur.initCompteur()", 1000);
+            this.compteARebour = setInterval("Compteur.initCompteur()", 1000);
 
             // Insert le nom de la station
             document.getElementById("messageLocation").querySelector("strong").innerHTML = this.nomStation;
@@ -159,10 +159,10 @@ var compteur = {
 
     // Méthode qui annule la réservation en cours
     resetReservation : function() {
-        if(this.nomStation != station.nom) { // Si le nom de la station de réservation est différent du nom de la station sélectionnée
+        if(this.nomStation != Station.nom) { // Si le nom de la station de réservation est différent du nom de la station sélectionnée
             // Affiche une demande de confirmation
             this.annulationReservation = window.confirm("Cette nouvelle réservation annulera la réservation sur la station : " + this.nomStation +
-            "\net enregistrera une nouvelle réservation sur la station " + station.nom);
+            "\net enregistrera une nouvelle réservation sur la station " + Station.nom);
         } else { // Sinon les deux noms sont identiques
             // Affiche une demande de confirmation
             this.annulationReservation = window.confirm("Cette nouvelle réservation remplacera la réservation déja existante sur la station : \n" + this.nomStation);
@@ -188,25 +188,25 @@ var compteur = {
 }
 
 // Vérification de l'existence d'une réservation
-compteur.verificationSessionStorage();
+Compteur.verificationSessionStorage();
 
 // Événements lors de la validation du Canvas
 document.getElementById("boutonValider").addEventListener("click", function() {
-    localStorage.setItem("signature", signature.canvas.toDataURL());
-    signature.clearCanvas(); // Efface le Canvas
+    localStorage.setItem("signature", Signature.canvas.toDataURL());
+    Signature.clearCanvas(); // Efface le Canvas
     
     // Vérification d'une réservation existante
     if(sessionStorage.getItem("minutes")) { // Si une réservation existe
         // Suppression de la réservation existante
-        compteur.resetReservation();
+        Compteur.resetReservation();
     } else { // Aucune réservation n'existe
         // Lance la méthode de lancement de la réservation
-        compteur.lancementReservation();
+        Compteur.lancementReservation();
     }
 });
 
 // Evénement lors du clique sur le bouton d'annulation d'une réservation
 document.getElementById("annulation").addEventListener("click", function() {
     // Lance la méthode d'annulation
-    compteur.annulerReservation();
+    Compteur.annulerReservation();
 });

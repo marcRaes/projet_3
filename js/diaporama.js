@@ -3,7 +3,7 @@
 /* --------------------------------*/
 
 // Objet diaporama
-var diaporama = {
+var Diaporama = {
     items : document.getElementsByClassName("item"), // Attribut de sélection des figures
     imageNum : 0, // Attribut qui permet de parcourir les images
 
@@ -40,10 +40,10 @@ var diaporama = {
 }
 
 // Le bouton droit appel la méthode "suivant" du diaporama
-document.getElementById("bouttonDroit").addEventListener("click", diaporama.suivant.bind(diaporama));
+document.getElementById("bouttonDroit").addEventListener("click", Diaporama.suivant.bind(Diaporama));
 
 // Le bouton gauche appel la méthode "précédent" du diaporama
-document.getElementById("bouttonGauche").addEventListener("click", diaporama.precedent.bind(diaporama));
+document.getElementById("bouttonGauche").addEventListener("click", Diaporama.precedent.bind(Diaporama));
 
 // Gestion de l'appui et du relâchement d'une touche du clavier
-document.addEventListener("keydown", diaporama.infosClavier.bind(diaporama));
+document.addEventListener("keydown", Diaporama.infosClavier.bind(Diaporama));

@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------- */
 
 // Objet signature  ==>  Le canvas
-var signature = {
+var Signature = {
     // Attributs
     ecriture : false, // Attribut d'activation de l'écriture
     canvas : document.getElementById("signature"), // Sélection du canvas dans le HTML
@@ -113,16 +113,16 @@ var signature = {
 }
 
 // Appel des méthodes sur écrans tactiles
-signature.canvas.addEventListener("touchstart", signature.convertTouchEvent);
-signature.canvas.addEventListener("touchmove", signature.convertTouchEvent);
-signature.canvas.addEventListener("touchend", signature.convertTouchEvent);
+Signature.canvas.addEventListener("touchstart", Signature.convertTouchEvent);
+Signature.canvas.addEventListener("touchmove", Signature.convertTouchEvent);
+Signature.canvas.addEventListener("touchend", Signature.convertTouchEvent);
 
 // Appel des méthodes sur PC
-signature.canvas.addEventListener("mousedown", signature.activationDessin.bind(signature));
-signature.canvas.addEventListener("mousemove", signature.deplacementSouris.bind(signature));
-signature.canvas.addEventListener("mouseup", signature.desactivationDessin.bind(signature));
+Signature.canvas.addEventListener("mousedown", Signature.activationDessin.bind(Signature));
+Signature.canvas.addEventListener("mousemove", Signature.deplacementSouris.bind(Signature));
+Signature.canvas.addEventListener("mouseup", Signature.desactivationDessin.bind(Signature));
 
 // Appel de la méthode d'effacement du canvas lors de l'appui sur le bouton "effacer"
 document.getElementById("boutonEffacer").addEventListener("click", function() {
-    signature.clearCanvas();
+    Signature.clearCanvas();
 });
